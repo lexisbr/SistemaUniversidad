@@ -18,9 +18,7 @@ public class Manejador {
     private static Usuario usuarioActual;
 
     public static void inicializarSistema(){
-        listaUsuarios.add(new Usuario(123, "Alejandrio", "1", Usuario.ESTUDIANTE));
-        listaUsuarios.add(new Usuario(1234, "Gordo", "1", Usuario.ESTUDIANTE));
-        listaUsuarios.add(new Usuario(1235, "Trolo", "1", Usuario.ESTUDIANTE));
+        listaUsuarios.add(new Usuario(12345, "Alejandro", "1", Usuario.SUPER));
         listaUsuarios.mostrarDatos();
     }
     
@@ -45,5 +43,14 @@ public class Manejador {
     public static Usuario getUsuarioActual(){
         return usuarioActual;
     }
-
+    
+    /****
+     * METODO PARA LISTA DE USUARIOS    
+     */ 
+    
+    public static boolean addUser(int id, String name, String password, String type){
+        boolean add = listaUsuarios.add(new Usuario(id,name,password,type));
+        listaUsuarios.mostrarDatos();
+        return add;
+    }
 }

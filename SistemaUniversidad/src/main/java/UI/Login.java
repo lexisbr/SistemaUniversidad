@@ -5,7 +5,9 @@
  */
 package UI;
 
+import AdminUI.InicioAdmin;
 import Nucleo.Manejador;
+import Objetos.Usuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -131,7 +133,12 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (Manejador.loginUser(userTxt.getText(), passwordTxt.getText()))
         {
-            JOptionPane.showMessageDialog(this, "Ingreso correctamente "+Manejador.getUsuarioActual().getName());
+            if(Manejador.getUsuarioActual().getType().equals(Usuario.SUPER)){
+                new InicioAdmin();
+                this.dispose();
+            }else{
+               JOptionPane.showMessageDialog(this,"Usted no es admin");
+            }
         } else
         {
             JOptionPane.showMessageDialog(this, "Login incorrecto");

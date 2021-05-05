@@ -43,7 +43,7 @@ public class ListaCircular<T> {
         end = null;
     }
 
-    public void add(T data) {
+    public boolean add(T data) {
         Nodo nuevoNodo = new Nodo<T>(data);
 
         if (root == null)
@@ -62,8 +62,9 @@ public class ListaCircular<T> {
         } else
         {
             String id = getId(data);
-            JOptionPane.showMessageDialog(null, "El dato: \"" + id + "\" ya existe.");
+            return false;
         }
+        return true;
     }
 
     private boolean doesntExist(T data) {
