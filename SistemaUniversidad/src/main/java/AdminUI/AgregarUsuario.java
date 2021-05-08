@@ -45,7 +45,7 @@ public class AgregarUsuario extends javax.swing.JFrame {
         passwordTxt = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -66,8 +66,8 @@ public class AgregarUsuario extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel4.setText("Contraseña:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
-        jPanel1.add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 210, -1));
-        jPanel1.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 210, -1));
+        jPanel1.add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 210, 30));
+        jPanel1.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 210, 30));
 
         tipoTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Colaborador", " " }));
         jPanel1.add(tipoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 210, 30));
@@ -85,7 +85,7 @@ public class AgregarUsuario extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 130, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 420));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 410));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -103,6 +103,9 @@ public class AgregarUsuario extends javax.swing.JFrame {
                 if (Manejador.addUser(id, name, password, type))
                 {
                     JOptionPane.showMessageDialog(this, "Se ha agregado al usuario: " + id + " correctamente. ");
+                    idTxt.setText("");
+                    nombreTxt.setText("");
+                    passwordTxt.setText("");
                 } else
                 {
                     JOptionPane.showMessageDialog(this, "No se ha agregado al usuario: " + id + " porque este ID ya existe. ");

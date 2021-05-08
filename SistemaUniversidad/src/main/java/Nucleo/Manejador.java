@@ -45,12 +45,25 @@ public class Manejador {
     }
     
     /****
-     * METODO PARA LISTA DE USUARIOS    
+     * METODOS PARA LISTA DE USUARIOS    
      */ 
     
     public static boolean addUser(int id, String name, String password, String type){
         boolean add = listaUsuarios.add(new Usuario(id,name,password,type));
         listaUsuarios.mostrarDatos();
         return add;
+    }
+    
+    public static Usuario searchUser(int id){
+        Usuario user = listaUsuarios.getData(String.valueOf(id));
+        return user;
+    }
+    
+    public static boolean deleteUser(int id){
+        return listaUsuarios.delete(String.valueOf(id));
+    }
+    
+    public static boolean updateUser(Usuario user){
+        return listaUsuarios.update(user);
     }
 }
