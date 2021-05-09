@@ -6,6 +6,7 @@
 package Nucleo;
 
 import Estructuras.ListaCircular;
+import Objetos.Edificio;
 import Objetos.Usuario;
 
 /**
@@ -15,6 +16,7 @@ import Objetos.Usuario;
 public class Manejador {
 
     private static ListaCircular<Usuario> listaUsuarios = new ListaCircular<Usuario>();
+    private static ListaCircular<Edificio> listaEdificios = new ListaCircular<Edificio>();
     private static Usuario usuarioActual;
 
     public static void inicializarSistema(){
@@ -65,5 +67,13 @@ public class Manejador {
     
     public static boolean updateUser(Usuario user){
         return listaUsuarios.update(user);
+    }
+    
+    /**
+     * METODOS PARA LISTA DE EDIFICIOS
+     */
+    
+    public static boolean addEdificio(String name){
+        return listaEdificios.add(new Edificio(name));
     }
 }

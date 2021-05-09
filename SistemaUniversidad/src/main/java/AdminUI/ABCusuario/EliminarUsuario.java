@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AdminUI;
+package AdminUI.ABCusuario;
 
 import Nucleo.Manejador;
 import Objetos.Usuario;
@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
  *
  * @author lex
  */
-public class EditarUsuario extends javax.swing.JFrame {
+public class EliminarUsuario extends javax.swing.JFrame {
 
     /**
-     * Creates new form EditarUsuario
+     * Creates new form EliminarUsuario
      */
-    public EditarUsuario() {
+    public EliminarUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -48,19 +48,18 @@ public class EditarUsuario extends javax.swing.JFrame {
         tipoTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         idTxt = new javax.swing.JTextField();
-        editarButton = new javax.swing.JButton();
-        passwordTxt = new javax.swing.JPasswordField();
-        jLabel4 = new javax.swing.JLabel();
+        eliminarButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Liberation Serif", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Editar Usuario");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, 50));
+        jLabel2.setText("Eliminar Usuario");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, 50));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -103,7 +102,7 @@ public class EditarUsuario extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 370, 110));
 
-        jLabel6.setText("Editar usuario");
+        jLabel6.setText("Eliminar usuario");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -113,6 +112,8 @@ public class EditarUsuario extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel1.setText("Tipo:");
+
+        nombreTxt.setEditable(false);
 
         tipoTxt.setEditable(false);
 
@@ -126,22 +127,13 @@ public class EditarUsuario extends javax.swing.JFrame {
             }
         });
 
-        editarButton.setText("Actualizar");
-        editarButton.setEnabled(false);
-        editarButton.addActionListener(new java.awt.event.ActionListener() {
+        eliminarButton.setText("Eliminar");
+        eliminarButton.setEnabled(false);
+        eliminarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarButtonActionPerformed(evt);
+                eliminarButtonActionPerformed(evt);
             }
         });
-
-        passwordTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordTxtActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel4.setText("Contraseña:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -167,13 +159,8 @@ public class EditarUsuario extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(passwordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(editarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(110, 110, 110)
+                        .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -191,38 +178,38 @@ public class EditarUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tipoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(passwordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(editarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 370, 260));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 370, 230));
 
         jLabel8.setText("Busqueda de usuario");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
+        // TODO add your handling code here:
+        int id = Integer.parseInt(idTxt.getText());
+        if(Manejador.deleteUser(id)){
+            JOptionPane.showMessageDialog(this, "Se ha eliminado correctamente el usuario");
+            eliminarButton.setEnabled(false);
+            idTxt.setText("");
+            nombreTxt.setText("");
+            tipoTxt.setText("");
+        }else{
+            JOptionPane.showMessageDialog(this, "No se ha podido eliminar correctamente");
+        }
+    }//GEN-LAST:event_eliminarButtonActionPerformed
+
+    private void idTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idTxtActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -235,9 +222,8 @@ public class EditarUsuario extends javax.swing.JFrame {
                 idTxt.setText(String.valueOf(user.getId()));
                 nombreTxt.setText(user.getName());
                 tipoTxt.setText(user.getType());
-                passwordTxt.setText(user.getPassword());
                 idField.setText("");
-                editarButton.setEnabled(true);
+                eliminarButton.setEnabled(true);
             } else
             {
                 JOptionPane.showMessageDialog(this, "El usuario no existe");
@@ -247,34 +233,8 @@ public class EditarUsuario extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this, "El ID debe ser numerico");
         }
+
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void idTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idTxtActionPerformed
-
-    private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
-        // TODO add your handling code here:
-        int id = Integer.parseInt(idTxt.getText());
-        String name = nombreTxt.getText();
-        String type = tipoTxt.getText();
-        String password = passwordTxt.getText();
-        Usuario user = new Usuario(id,name,type,password);
-        if(Manejador.updateUser(user)){
-            JOptionPane.showMessageDialog(this, "Se ha actualizado correctamente el usuario");
-            editarButton.setEnabled(false);
-            idTxt.setText("");
-            nombreTxt.setText("");
-            tipoTxt.setText("");
-            passwordTxt.setText("");
-        }else{
-            JOptionPane.showMessageDialog(this, "No se ha podido actualizar correctamente");
-        }
-    }//GEN-LAST:event_editarButtonActionPerformed
-
-    private void passwordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordTxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,36 +257,35 @@ public class EditarUsuario extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarUsuario().setVisible(true);
+                new EliminarUsuario().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton editarButton;
+    private javax.swing.JButton eliminarButton;
     private javax.swing.JTextField idField;
     private javax.swing.JTextField idTxt;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -335,7 +294,6 @@ public class EditarUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField nombreTxt;
-    private javax.swing.JPasswordField passwordTxt;
     private javax.swing.JTextField tipoTxt;
     // End of variables declaration//GEN-END:variables
 }

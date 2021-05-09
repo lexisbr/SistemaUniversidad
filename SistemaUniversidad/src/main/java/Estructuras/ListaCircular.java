@@ -6,6 +6,7 @@
 package Estructuras;
 
 import Objetos.Edificio;
+import Objetos.Salon;
 import Objetos.Usuario;
 import javax.swing.JOptionPane;
 
@@ -15,28 +16,23 @@ import javax.swing.JOptionPane;
  */
 public class ListaCircular<T> {
 
+    public static void main(String[] args) {
+        ListaCircular<Edificio> listaEdificios = new ListaCircular<Edificio>();
+        Edificio e1 = new Edificio("e1");
+        e1.getListaSalones().add(new Salon(1, 100));
+        e1.getListaSalones().add(new Salon(2, 100));
+        e1.getListaSalones().add(new Salon(3, 100));
+        Edificio e2 = new Edificio("e2");
+        e2.getListaSalones().add(new Salon(1, 200));
+        e2.getListaSalones().add(new Salon(2, 200));
+        listaEdificios.add(e1);
+        listaEdificios.add(e2);
+        listaEdificios.mostrarDatos();
+    }
+
     private Nodo<T> root;
     private Nodo<T> end;
     private int size;
-
-    public static void main(String[] args) {
-        ListaCircular<Usuario> lista = new ListaCircular<Usuario>();
-        lista.add(new Usuario(123, "Alejandrio", "Alejandrio", Usuario.ESTUDIANTE));
-        lista.add(new Usuario(1234, "Gordo", "Alejandrio", Usuario.ESTUDIANTE));
-        lista.add(new Usuario(1235, "Trolo", "Alejandrio", Usuario.ESTUDIANTE));
-
-        lista.mostrarDatos();
-        lista.delete("123");
-        lista.mostrarDatos();
-        lista.delete("1235");
-        lista.mostrarDatos();
-        lista.delete("1234");
-        lista.mostrarDatos();
-        lista.mostrarDatos();
-        lista.update(new Usuario(1235, "Alejandro Barrios", "sheeesh", Usuario.COLABORADOR));
-        lista.mostrarDatos();
-
-    }
 
     public ListaCircular() {
         root = null;
@@ -64,6 +60,7 @@ public class ListaCircular<T> {
             String id = getId(data);
             return false;
         }
+        size++;
         return true;
     }
 
@@ -143,7 +140,7 @@ public class ListaCircular<T> {
     public boolean delete(String id) {
         if (root != null)
         {
-            Nodo nodo = getNodo(id);
+            Nodo<T> nodo = getNodo(id);
             if (nodo != null)
             {
                 String id_root = getId(root.getData());
@@ -151,6 +148,7 @@ public class ListaCircular<T> {
                 if (root == end)
                 {
                     root = end = null;
+                    size--;
                     return true;
                 } else if (id.equals(id_root))
                 {
@@ -163,6 +161,7 @@ public class ListaCircular<T> {
                 Nodo<T> nodoSiguiente = nodo.getNext();
                 nodoAnterior.setNext(nodoSiguiente);
                 nodoSiguiente.setPrev(nodoAnterior);
+                size--;
                 return true;
             }
         }
@@ -195,18 +194,22 @@ public class ListaCircular<T> {
                     System.out.println("Nombre: " + user.getName());
                     System.out.println("Password: " + user.getPassword());
                     System.out.println("Tipo: " + user.getType());
-                    if (aux.getNext() != null)
-                    {
-                        System.out.println("Siguiente: " + getId(aux.getNext().getData()));
-                    }
-                    if (aux.getPrev() != null)
-                    {
-                        System.out.println("Anterior: " + getId(aux.getPrev().getData()));
-                    }
 
                 } else if (aux.getData() instanceof Edificio)
                 {
-
+                    Edificio edificio = (Edificio) aux.getData();
+                    System.out.println("************ EDIFICIO ************");
+                    System.out.println("Nombre: " + edificio.getName());
+                    System.out.println("\tSalones:");
+                    edificio.getListaSalones().showData();
+                }
+                if (aux.getNext() != null)
+                {
+                    System.out.println("Siguiente: " + getId(aux.getNext().getData()));
+                }
+                if (aux.getPrev() != null)
+                {
+                    System.out.println("Anterior: " + getId(aux.getPrev().getData()));
                 }
                 aux = aux.getNext();
             } while (aux != root);
