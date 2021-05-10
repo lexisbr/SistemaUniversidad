@@ -87,6 +87,25 @@ public class ListaSimple<T> {
         return null;
     }
 
+    public T getData(String id) {
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+            while (aux != null)
+            {
+                String id_aux = getId(aux.getData());
+                if (id.equals(id_aux))
+                {
+                    return aux.getData();
+                } else
+                {
+                    aux = aux.getNext();
+                }
+            }
+        }
+        return null;
+    }
+
     private Nodo<T> getPrevious(Nodo<T> nodo) {
         Nodo<T> aux = root;
 
@@ -145,6 +164,40 @@ public class ListaSimple<T> {
         {
             return false;
         }
+    }
+
+    public T get(int indice) {
+        int indice_aux = 0;
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+            while (aux != null)
+            {
+                if (indice_aux == indice)
+                {
+                    return aux.getData();
+                } else
+                {
+                    aux = aux.getNext();
+                    indice_aux++;
+                }
+            }
+        }
+        return null;
+    }
+
+    public int getSize() {
+        int size = 0;
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+            while (aux != null)
+            {
+                size++;
+                aux = aux.getNext();
+            }
+        }
+        return size;
     }
 
     public void showData() {

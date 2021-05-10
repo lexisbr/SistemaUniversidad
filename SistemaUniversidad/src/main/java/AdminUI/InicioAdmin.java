@@ -5,6 +5,10 @@
  */
 package AdminUI;
 
+import AdminUI.ABCedificio.AgregarEdificio;
+import AdminUI.ABCedificio.EliminarEdificio;
+import AdminUI.ABCsalon.AgregarSalon;
+import AdminUI.ABCsalon.EliminarSalon;
 import AdminUI.ABCusuario.EditarUsuario;
 import AdminUI.ABCusuario.EliminarUsuario;
 import AdminUI.ABCusuario.AgregarUsuario;
@@ -55,7 +59,9 @@ public class InicioAdmin extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        salonMenu = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -135,6 +141,11 @@ public class InicioAdmin extends javax.swing.JFrame {
         jMenu2.setText("Edificios");
 
         jMenuItem4.setText("Agregar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setText("Eliminar");
@@ -145,15 +156,27 @@ public class InicioAdmin extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
-        jMenuItem6.setText("Modificar");
+        jMenuBar1.add(jMenu2);
+
+        salonMenu.setText("Salones");
+
+        jMenuItem6.setText("Agregar");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem6);
+        salonMenu.add(jMenuItem6);
 
-        jMenuBar1.add(jMenu2);
+        jMenuItem7.setText("Eliminar");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        salonMenu.add(jMenuItem7);
+
+        jMenuBar1.add(salonMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -177,11 +200,23 @@ public class InicioAdmin extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
+        new EliminarEdificio();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        new AgregarEdificio();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
+        new AgregarSalon();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        new EliminarSalon();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,8 +277,10 @@ public class InicioAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nombreTxt;
+    private javax.swing.JMenu salonMenu;
     private javax.swing.JLabel tipousuarioTxt;
     // End of variables declaration//GEN-END:variables
 }

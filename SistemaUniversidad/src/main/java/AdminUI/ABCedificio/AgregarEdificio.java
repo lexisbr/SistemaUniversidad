@@ -19,6 +19,9 @@ public class AgregarEdificio extends javax.swing.JFrame {
      */
     public AgregarEdificio() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.pack();
     }
 
     /**
@@ -38,7 +41,7 @@ public class AgregarEdificio extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -106,6 +109,7 @@ public class AgregarEdificio extends javax.swing.JFrame {
             if (Manejador.addEdificio(name))
             {
                 JOptionPane.showMessageDialog(this, "Edificio: " + name + " se ha agregado correctamente.");
+                nombreTxt.setText("");
             }else{
                 JOptionPane.showMessageDialog(this, "No se ha podido agregar el edificio porque este nombre ya existe.");
             }
