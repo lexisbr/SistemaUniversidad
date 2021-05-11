@@ -5,30 +5,16 @@
  */
 package Estructuras;
 
+import Objetos.Curso;
 import Objetos.Edificio;
 import Objetos.Salon;
 import Objetos.Usuario;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author lex
  */
 public class ListaCircular<T> {
-
-    public static void main(String[] args) {
-        ListaCircular<Edificio> listaEdificios = new ListaCircular<Edificio>();
-        Edificio e1 = new Edificio("e1");
-        e1.getListaSalones().add(new Salon(1, 100));
-        e1.getListaSalones().add(new Salon(2, 100));
-        e1.getListaSalones().add(new Salon(3, 100));
-        Edificio e2 = new Edificio("e2");
-        e2.getListaSalones().add(new Salon(1, 200));
-        e2.getListaSalones().add(new Salon(2, 200));
-        listaEdificios.add(e1);
-        listaEdificios.add(e2);
-        listaEdificios.mostrarDatos();
-    }
 
     private Nodo<T> root;
     private Nodo<T> end;
@@ -93,6 +79,10 @@ public class ListaCircular<T> {
         {
             Edificio edificio = (Edificio) data;
             return edificio.getName();
+        } else if (data instanceof Curso)
+        {
+            Curso curso = (Curso) data;
+            return String.valueOf(curso.getId());
         }
 
         return null;
@@ -202,6 +192,14 @@ public class ListaCircular<T> {
                     System.out.println("Nombre: " + edificio.getName());
                     System.out.println("\tSalones:");
                     edificio.getListaSalones().showData();
+                } else if (aux.getData() instanceof Curso)
+                {
+                    Curso curso = (Curso) aux.getData();
+                    System.out.println("************ CURSO ************");
+                    System.out.println("Codigo: " + curso.getId());
+                    System.out.println("Nombre: " + curso.getName());
+                    System.out.println("Semestre: " + curso.getSemester());
+                    System.out.println("Creditos: " + curso.getCredits());
                 }
                 if (aux.getNext() != null)
                 {

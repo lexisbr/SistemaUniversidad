@@ -176,9 +176,10 @@ public class EliminarSalon extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String nombre_edificio = searchTxt.getText();
-        edificioSeleccionado = Manejador.searchEdificio(nombre_edificio);
-        if (edificioSeleccionado != null)
+        Edificio edificio = Manejador.searchEdificio(nombre_edificio);
+        if (edificio != null)
         {
+            edificioSeleccionado = edificio;
             nombreTxt.setText(edificioSeleccionado.getName());
             searchTxt.setText("");
             eliminarButton.setEnabled(true);
@@ -186,7 +187,7 @@ public class EliminarSalon extends javax.swing.JFrame {
 
         } else
         {
-            JOptionPane.showMessageDialog(this, "El edificio no existe");
+            JOptionPane.showMessageDialog(this, "El edificio no existe","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -199,7 +200,7 @@ public class EliminarSalon extends javax.swing.JFrame {
             cargarSalonesCombo();
         } else
         {
-            JOptionPane.showMessageDialog(this, "No se ha podido eliminar");
+            JOptionPane.showMessageDialog(this, "No se ha podido eliminar","Error",JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_eliminarButtonActionPerformed

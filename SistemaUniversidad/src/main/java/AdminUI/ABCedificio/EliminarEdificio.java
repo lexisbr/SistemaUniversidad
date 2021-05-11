@@ -156,15 +156,16 @@ public class EliminarEdificio extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String name = nameField.getText();
-        edificioSeleccionado = Manejador.searchEdificio(name);
-        if (edificioSeleccionado != null)
+        Edificio edificio = Manejador.searchEdificio(name);
+        if (edificio != null)
         {
+            edificioSeleccionado = edificio;
             nombreTxt.setText(edificioSeleccionado.getName());
             nameField.setText("");
             eliminarButton.setEnabled(true);
         } else
         {
-            JOptionPane.showMessageDialog(this, "El edificio no existe");
+            JOptionPane.showMessageDialog(this, "El edificio no existe","Error",JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -180,7 +181,7 @@ public class EliminarEdificio extends javax.swing.JFrame {
             Manejador.getListaEdificios().mostrarDatos();
         } else
         {
-            JOptionPane.showMessageDialog(this, "No se ha podido eliminar correctamente");
+            JOptionPane.showMessageDialog(this, "No se ha podido eliminar correctamente","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_eliminarButtonActionPerformed
 

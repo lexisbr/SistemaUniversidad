@@ -3,22 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AdminUI.ABCusuario;
+package AdminUI.ABCcurso;
 
 import Nucleo.Manejador;
-import Objetos.Usuario;
+import Objetos.Curso;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author lex
  */
-public class EditarUsuario extends javax.swing.JFrame {
+public class EliminarCurso extends javax.swing.JFrame {
 
+    private Curso cursoSeleccionado;
     /**
-     * Creates new form EditarUsuario
+     * Creates new form EliminarCurso
      */
-    public EditarUsuario() {
+    public EliminarCurso() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -38,19 +39,19 @@ public class EditarUsuario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        idField = new javax.swing.JTextField();
+        searchTxt = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         nombreTxt = new javax.swing.JTextField();
-        tipoTxt = new javax.swing.JTextField();
+        semestreTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        idTxt = new javax.swing.JTextField();
-        editarButton = new javax.swing.JButton();
-        passwordTxt = new javax.swing.JPasswordField();
+        codigoTxt = new javax.swing.JTextField();
+        eliminarButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        creditosTxt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -59,13 +60,13 @@ public class EditarUsuario extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Liberation Serif", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Editar Usuario");
+        jLabel2.setText("Eliminar Curso");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, 50));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel3.setText("ID:");
+        jLabel3.setText("Codigo:");
 
         jButton2.setText("Buscar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -78,16 +79,17 @@ public class EditarUsuario extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(31, 31, 31)
-                .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +97,7 @@ public class EditarUsuario extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -103,7 +105,7 @@ public class EditarUsuario extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 370, 110));
 
-        jLabel6.setText("Editar usuario");
+        jLabel6.setText("Eliminar curso");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -112,36 +114,34 @@ public class EditarUsuario extends javax.swing.JFrame {
         jLabel5.setText("Nombre:");
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel1.setText("Tipo:");
+        jLabel1.setText("Semestre:");
 
-        tipoTxt.setEditable(false);
+        nombreTxt.setEditable(false);
+
+        semestreTxt.setEditable(false);
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel7.setText("ID:");
+        jLabel7.setText("Codigo:");
 
-        idTxt.setEditable(false);
-        idTxt.addActionListener(new java.awt.event.ActionListener() {
+        codigoTxt.setEditable(false);
+        codigoTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idTxtActionPerformed(evt);
+                codigoTxtActionPerformed(evt);
             }
         });
 
-        editarButton.setText("Actualizar");
-        editarButton.setEnabled(false);
-        editarButton.addActionListener(new java.awt.event.ActionListener() {
+        eliminarButton.setText("Eliminar");
+        eliminarButton.setEnabled(false);
+        eliminarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarButtonActionPerformed(evt);
-            }
-        });
-
-        passwordTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordTxtActionPerformed(evt);
+                eliminarButtonActionPerformed(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel4.setText("Contraseña:");
+        jLabel4.setText("Creditos:");
+
+        creditosTxt.setEditable(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -150,7 +150,7 @@ public class EditarUsuario extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -158,30 +158,29 @@ public class EditarUsuario extends javax.swing.JFrame {
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tipoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(semestreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(nombreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
-                                .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(codigoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(creditosTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(passwordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(editarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addGap(110, 110, 110)
+                        .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(codigoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -190,35 +189,30 @@ public class EditarUsuario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tipoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(semestreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(passwordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(creditosTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(editarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 370, 260));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 370, 250));
 
-        jLabel8.setText("Busqueda de usuario");
+        jLabel8.setText("Busqueda de curso");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -228,19 +222,20 @@ public class EditarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         try
         {
-            int id_user = Integer.parseInt(idField.getText());
-            Usuario user = Manejador.searchUser(id_user);
-            if (user != null && !user.getType().equals(Usuario.SUPER))
+            String id_curse = searchTxt.getText();
+            Curso curso = Manejador.searchCurso(id_curse);
+            if (curso != null)
             {
-                idTxt.setText(String.valueOf(user.getId()));
-                nombreTxt.setText(user.getName());
-                tipoTxt.setText(user.getType());
-                passwordTxt.setText(user.getPassword());
-                idField.setText("");
-                editarButton.setEnabled(true);
+                cursoSeleccionado = curso;
+                codigoTxt.setText(String.valueOf(cursoSeleccionado.getId()));
+                nombreTxt.setText(cursoSeleccionado.getName());
+                semestreTxt.setText(String.valueOf(cursoSeleccionado.getSemester()));
+                creditosTxt.setText(String.valueOf(cursoSeleccionado.getCredits()));
+                searchTxt.setText("");
+                eliminarButton.setEnabled(true);
             } else
             {
-                JOptionPane.showMessageDialog(this, "El usuario no existe","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El curso no existe","Error",JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (NumberFormatException e)
@@ -249,32 +244,25 @@ public class EditarUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void idTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTxtActionPerformed
+    private void codigoTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_idTxtActionPerformed
+    }//GEN-LAST:event_codigoTxtActionPerformed
 
-    private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
+    private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(idTxt.getText());
-        String name = nombreTxt.getText();
-        String type = tipoTxt.getText();
-        String password = passwordTxt.getText();
-        Usuario user = new Usuario(id,name,type,password);
-        if(Manejador.updateUser(user)){
-            JOptionPane.showMessageDialog(this, "Se ha actualizado correctamente el usuario");
-            editarButton.setEnabled(false);
-            idTxt.setText("");
+        String id = String.valueOf(cursoSeleccionado.getId());
+        if(Manejador.deleteCurso(id)){
+            eliminarButton.setEnabled(false);
+            codigoTxt.setText("");
             nombreTxt.setText("");
-            tipoTxt.setText("");
-            passwordTxt.setText("");
+            semestreTxt.setText("");
+            creditosTxt.setText("");
+            cursoSeleccionado = null;
+            JOptionPane.showMessageDialog(this, "Se ha eliminado correctamente el curso");
         }else{
-            JOptionPane.showMessageDialog(this, "No se ha podido actualizar correctamente","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se ha podido eliminar correctamente","Error",JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_editarButtonActionPerformed
-
-    private void passwordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordTxtActionPerformed
+    }//GEN-LAST:event_eliminarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,31 +285,31 @@ public class EditarUsuario extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(EditarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarUsuario().setVisible(true);
+                new EliminarCurso().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton editarButton;
-    private javax.swing.JTextField idField;
-    private javax.swing.JTextField idTxt;
+    private javax.swing.JTextField codigoTxt;
+    private javax.swing.JTextField creditosTxt;
+    private javax.swing.JButton eliminarButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -335,7 +323,7 @@ public class EditarUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField nombreTxt;
-    private javax.swing.JPasswordField passwordTxt;
-    private javax.swing.JTextField tipoTxt;
+    private javax.swing.JTextField searchTxt;
+    private javax.swing.JTextField semestreTxt;
     // End of variables declaration//GEN-END:variables
 }

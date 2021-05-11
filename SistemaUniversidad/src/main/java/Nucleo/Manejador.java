@@ -6,6 +6,7 @@
 package Nucleo;
 
 import Estructuras.ListaCircular;
+import Objetos.Curso;
 import Objetos.Edificio;
 import Objetos.Salon;
 import Objetos.Usuario;
@@ -18,11 +19,11 @@ public class Manejador {
 
     private static ListaCircular<Usuario> listaUsuarios = new ListaCircular<Usuario>();
     private static ListaCircular<Edificio> listaEdificios = new ListaCircular<Edificio>();
+    private static ListaCircular<Curso> listaCursos = new ListaCircular<Curso>();
     private static Usuario usuarioActual;
 
     public static void inicializarSistema() {
         listaUsuarios.add(new Usuario(12345, "Alejandro", "1", Usuario.SUPER));
-        listaUsuarios.mostrarDatos();
     }
 
     public static boolean loginUser(String user, String password) {
@@ -113,5 +114,25 @@ public class Manejador {
     public static boolean updateSalonEdificio(String name, Salon salon){
         Edificio edificio = listaEdificios.getData(name);
         return edificio.getListaSalones().update(salon);
+    }
+    
+    /**
+     * METODOS PARA LISTA DE CURSO
+     */
+    
+    public static boolean addCurso(int id, String name,int semester,int credits){
+        return listaCursos.add(new Curso(id, name, semester, credits));
+    }
+    
+    public static Curso searchCurso(String id){
+        return listaCursos.getData(id);
+    }
+    
+    public static boolean deleteCurso(String id){
+        return listaCursos.delete(id);
+    }
+    
+    public static ListaCircular<Curso> getListaCursos(){
+        return listaCursos;
     }
 }

@@ -203,7 +203,7 @@ public class EliminarUsuario extends javax.swing.JFrame {
             nombreTxt.setText("");
             tipoTxt.setText("");
         }else{
-            JOptionPane.showMessageDialog(this, "No se ha podido eliminar correctamente");
+            JOptionPane.showMessageDialog(this, "No se ha podido eliminar correctamente","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_eliminarButtonActionPerformed
 
@@ -226,12 +226,12 @@ public class EliminarUsuario extends javax.swing.JFrame {
                 eliminarButton.setEnabled(true);
             } else
             {
-                JOptionPane.showMessageDialog(this, "El usuario no existe");
+                JOptionPane.showMessageDialog(this, "El usuario no existe","Error",JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(this, "El ID debe ser numerico");
+            JOptionPane.showMessageDialog(this, "El ID debe ser numerico","Error",JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed

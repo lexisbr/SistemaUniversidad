@@ -111,11 +111,11 @@ public class AgregarEdificio extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Edificio: " + name + " se ha agregado correctamente.");
                 nombreTxt.setText("");
             }else{
-                JOptionPane.showMessageDialog(this, "No se ha podido agregar el edificio porque este nombre ya existe.");
+                JOptionPane.showMessageDialog(this, "No se ha podido agregar el edificio porque este nombre ya existe.","Error",JOptionPane.ERROR_MESSAGE);
             }
         } else
         {
-            JOptionPane.showMessageDialog(this, "Nombre no valido");
+            JOptionPane.showMessageDialog(this, "Nombre no valido","Error",JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed

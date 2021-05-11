@@ -202,7 +202,7 @@ public class AgregarSalon extends javax.swing.JFrame {
             numeroTxt.setEnabled(true);
             capacidadTxt.setEnabled(true);
         }else{
-            JOptionPane.showMessageDialog(this, "El edificio no existe");
+            JOptionPane.showMessageDialog(this, "El edificio no existe","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -218,12 +218,12 @@ public class AgregarSalon extends javax.swing.JFrame {
                 numeroTxt.setText("");
                 capacidadTxt.setText("");
             }else{
-                JOptionPane.showMessageDialog(this, "El salon: "+numero_salon+" ya existe en el edificio.");
+                JOptionPane.showMessageDialog(this, "El salon: "+numero_salon+" ya existe en el edificio.","Error",JOptionPane.ERROR_MESSAGE);
             }
             
         } catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(this, "Llene los campos correctamente.");
+            JOptionPane.showMessageDialog(this, "Llene los campos correctamente.","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_agregarButtonActionPerformed
 

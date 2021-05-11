@@ -22,6 +22,9 @@ public class EditarSalon extends javax.swing.JFrame {
      */
     public EditarSalon() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.pack();
     }
 
     /**
@@ -48,14 +51,14 @@ public class EditarSalon extends javax.swing.JFrame {
         salonesCombo = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        agregarButton = new javax.swing.JButton();
+        guardarButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         capacidadTxt = new javax.swing.JFormattedTextField();
         numeroTxt = new javax.swing.JFormattedTextField();
         jLabel12 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -63,7 +66,7 @@ public class EditarSalon extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Liberation Serif", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Editar Salon");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, 50));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, 50));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -173,11 +176,11 @@ public class EditarSalon extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        agregarButton.setText("Guardar");
-        agregarButton.setEnabled(false);
-        agregarButton.addActionListener(new java.awt.event.ActionListener() {
+        guardarButton.setText("Guardar");
+        guardarButton.setEnabled(false);
+        guardarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarButtonActionPerformed(evt);
+                guardarButtonActionPerformed(evt);
             }
         });
 
@@ -210,26 +213,26 @@ public class EditarSalon extends javax.swing.JFrame {
                             .addComponent(numeroTxt)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addComponent(agregarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(guardarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(74, 74, 74)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addComponent(numeroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(capacidadTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(agregarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(guardarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 290, 220));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 290, 310));
 
         jLabel12.setText("Editar Salon");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 140, 20));
@@ -242,9 +245,10 @@ public class EditarSalon extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String nombre_edificio = searchTxt.getText();
-        edificioSeleccionado = Manejador.searchEdificio(nombre_edificio);
-        if (edificioSeleccionado != null)
+        Edificio edificio = Manejador.searchEdificio(nombre_edificio);
+        if (edificio != null)
         {
+            edificioSeleccionado = edificio;
             nombreTxt.setText(edificioSeleccionado.getName());
             searchTxt.setText("");
             editarButton.setEnabled(true);
@@ -252,7 +256,7 @@ public class EditarSalon extends javax.swing.JFrame {
 
         } else
         {
-            JOptionPane.showMessageDialog(this, "El edificio no existe");
+            JOptionPane.showMessageDialog(this, "El edificio no existe","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -264,13 +268,15 @@ public class EditarSalon extends javax.swing.JFrame {
         {
             numeroTxt.setText(String.valueOf(salon.getId()));
             capacidadTxt.setText(String.valueOf(salon.getSize()));
+            capacidadTxt.setEnabled(true);
+            guardarButton.setEnabled(true);
         } else
         {
-            JOptionPane.showMessageDialog(this, "El salon no existe");
+            JOptionPane.showMessageDialog(this, "El salon no existe","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_editarButtonActionPerformed
 
-    private void agregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarButtonActionPerformed
+    private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
         // TODO add your handling code here:
         try
         {
@@ -282,14 +288,14 @@ public class EditarSalon extends javax.swing.JFrame {
                 numeroTxt.setText("");
                 capacidadTxt.setText("");
             }else{
-                JOptionPane.showMessageDialog(this, "El salon: "+numero_salon+" ya existe en el edificio.");
+                JOptionPane.showMessageDialog(this, "El salon: "+numero_salon+" ya existe en el edificio.","Error",JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(this, "Llene los campos correctamente.");
+            JOptionPane.showMessageDialog(this, "Llene los campos correctamente.","Error",JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_agregarButtonActionPerformed
+    }//GEN-LAST:event_guardarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,9 +351,9 @@ public class EditarSalon extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton agregarButton;
     private javax.swing.JFormattedTextField capacidadTxt;
     private javax.swing.JButton editarButton;
+    private javax.swing.JButton guardarButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
