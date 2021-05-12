@@ -132,6 +132,10 @@ public class Manejador {
         return listaCursos.delete(id);
     }
     
+    public static boolean updateCurso(Curso curso){
+        return listaCursos.update(curso);
+    }
+    
     public static ListaCircular<Curso> getListaCursos(){
         return listaCursos;
     }

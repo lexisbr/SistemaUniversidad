@@ -33,6 +33,7 @@ public class ListaSimple<T> {
             System.out.println("EL OBJETO YA EXISTE: " + getId(data));
             return false;
         }
+        sort();
         return true;
     }
 
@@ -61,6 +62,15 @@ public class ListaSimple<T> {
             return String.valueOf(salon.getId());
         }
         return null;
+    }
+    
+    private int getNumericId(T data){
+        if (data instanceof Salon)
+        {
+            Salon salon = (Salon) data;
+            return salon.getId();
+        }
+        return 0;
     }
 
     private Nodo<T> getNodo(String id) {
@@ -219,6 +229,35 @@ public class ListaSimple<T> {
         } else
         {
             System.out.println("************ LISTA VACIA ************");
+        }
+    }
+    
+    public void sort() {
+        int size = getSize();
+        if (size > 1)
+        {
+            for (int i = 0; i < getSize(); i++)
+            {
+                Nodo<T> actual = root;
+                Nodo<T> siguiente = actual.getNext();
+                for (int j = 1; j < getSize(); j++)
+                {
+                    int id_actual = getNumericId(actual.getData());
+                    int id_siguiente = getNumericId(siguiente.getData());
+                    if ( id_actual < id_siguiente )
+                    {
+                        T data_actual = actual.getData();
+                        actual.setData(siguiente.getData());
+                        siguiente.setData(data_actual);
+                        actual = actual.getNext();
+                        siguiente = siguiente.getNext();
+                    } else
+                    {
+                        actual = actual.getNext();
+                        siguiente = siguiente.getNext();
+                    }
+                }
+            }
         }
     }
 
