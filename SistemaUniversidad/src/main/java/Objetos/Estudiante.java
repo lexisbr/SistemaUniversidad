@@ -40,9 +40,8 @@ public class Estudiante {
         this.name = name;
     }
 
-    public void setAddress(String adress) {
+    public void setAddress(String address) {
         this.address = address;
     }
-    
     
 }

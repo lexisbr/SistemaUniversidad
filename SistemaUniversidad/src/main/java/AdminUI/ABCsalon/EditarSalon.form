@@ -332,7 +332,7 @@
             <Component class="javax.swing.JFormattedTextField" name="capacidadTxt">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format subtype="1" type="0"/>
+                  <Format format="" subtype="-1" type="0"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>

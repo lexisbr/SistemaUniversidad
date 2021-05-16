@@ -6,6 +6,8 @@
 package AdminUI.ABCusuario;
 
 import Nucleo.Manejador;
+import Objetos.Estudiante;
+import Objetos.Usuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -145,24 +147,31 @@ public class AgregarUsuario extends javax.swing.JFrame {
             String password = passwordTxt.getText();
             if (!name.equals("") && !type.equals("") && !password.equals(""))
             {
-                if (Manejador.addUser(id, name, password, type))
+                Estudiante estudiante = Manejador.searchEstudiante(id);
+                if (type.equals(Usuario.SUPER) || type.equals(Usuario.COLABORADOR) || estudiante != null)
                 {
-                    JOptionPane.showMessageDialog(this, "Se ha agregado al usuario: " + id + " correctamente. ");
-                    idTxt.setText("");
-                    nombreTxt.setText("");
-                    passwordTxt.setText("");
+                    if (Manejador.addUser(id, name, password, type, estudiante))
+                    {
+                        JOptionPane.showMessageDialog(this, "Se ha agregado al usuario: " + id + " correctamente. ");
+                        idTxt.setText("");
+                        nombreTxt.setText("");
+                        passwordTxt.setText("");
+                    } else
+                    {
+                        JOptionPane.showMessageDialog(this, "No se ha agregado al usuario: " + id + " porque este ID ya existe. ", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else
                 {
-                    JOptionPane.showMessageDialog(this, "No se ha agregado al usuario: " + id + " porque este ID ya existe. ","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "El usuario de tipo estudiante no existe en el sistema.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else
             {
-                JOptionPane.showMessageDialog(this, "Los campos estan incompletos","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Los campos estan incompletos", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(this, "El ID debe ser numerico","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El ID debe ser numerico", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

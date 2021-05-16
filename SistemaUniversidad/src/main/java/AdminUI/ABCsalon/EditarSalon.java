@@ -190,7 +190,7 @@ public class EditarSalon extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel11.setText("Capacidad:");
 
-        capacidadTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        capacidadTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
         capacidadTxt.setEnabled(false);
 
         numeroTxt.setEditable(false);

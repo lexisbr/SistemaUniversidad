@@ -18,6 +18,15 @@ public class Usuario {
     private String name;
     private String password;
     private String type;
+    private Estudiante estudiante;
+
+    public Usuario(int id, String name, String password, String type, Estudiante estudiante) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.type = type;
+        this.estudiante = estudiante;
+    }
 
     public Usuario(int id, String name, String password, String type) {
         this.id = id;
@@ -42,6 +51,10 @@ public class Usuario {
         return type;
     }
 
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -56,6 +69,10 @@ public class Usuario {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
     
     

@@ -6,6 +6,7 @@
 package UI;
 
 import AdminUI.InicioAdmin;
+import ColabUI.InicioColab;
 import Nucleo.Manejador;
 import Objetos.Usuario;
 import javax.swing.JOptionPane;
@@ -21,7 +22,12 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        Manejador.inicializarSistema();
+        if (Manejador.isEmptyUser())
+        {
+            Manejador.inicializarSistema();
+        }else{
+            System.out.println("Ya existe admin");
+        }
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.pack();
@@ -134,11 +140,14 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (Manejador.loginUser(userTxt.getText(), passwordTxt.getText()))
         {
-            if(Manejador.getUsuarioActual().getType().equals(Usuario.SUPER)){
+            if (Manejador.getUsuarioActual().getType().equals(Usuario.SUPER))
+            {
                 new InicioAdmin();
                 this.dispose();
-            }else{
-               JOptionPane.showMessageDialog(this,"Usted no es admin");
+            } else if(Manejador.getUsuarioActual().getType().equals(Usuario.COLABORADOR))
+            {
+                new InicioColab();
+                this.dispose();
             }
         } else
         {

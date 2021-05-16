@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AdminUI.ABCcurso;
+package ColabUI.ABCestudiante;
 
 import Nucleo.Manejador;
 import javax.swing.JOptionPane;
@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  *
  * @author lex
  */
-public class AgregarCurso extends javax.swing.JFrame {
+public class AgregarEstudiante extends javax.swing.JFrame {
 
     /**
-     * Creates new form AgregarCurso
+     * Creates new form AgregarCliente
      */
-    public AgregarCurso() {
+    public AgregarEstudiante() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -40,11 +40,9 @@ public class AgregarCurso extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         nombreTxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        semestreTxt = new javax.swing.JFormattedTextField();
-        creditosTxt = new javax.swing.JFormattedTextField();
-        codigoTxt = new javax.swing.JFormattedTextField();
+        carnetTxt = new javax.swing.JFormattedTextField();
+        direccionTxt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -54,22 +52,19 @@ public class AgregarCurso extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Liberation Serif", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Agregar Curso");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, 50));
+        jLabel2.setText("Agregar Estudiante");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, 50));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel3.setText("Codigo:");
+        jLabel3.setText("Carnet:");
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel5.setText("Nombre:");
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel1.setText("Semestre:");
-
-        jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel4.setText("Creditos:");
+        jLabel1.setText("Direccion:");
 
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -78,57 +73,53 @@ public class AgregarCurso extends javax.swing.JFrame {
             }
         });
 
-        semestreTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#"))));
+        carnetTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#"))));
 
-        creditosTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#"))));
-
-        codigoTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#"))));
+        direccionTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                direccionTxtActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+                .addContainerGap(49, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nombreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(creditosTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(codigoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(semestreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(carnetTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(direccionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(144, 144, 144)
+                .addGap(135, 135, 135)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(codigoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(carnetTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(nombreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(semestreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(creditosTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addComponent(direccionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(29, 29, 29))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 390, 240));
@@ -145,23 +136,21 @@ public class AgregarCurso extends javax.swing.JFrame {
         // TODO add your handling code here:
         try
         {
-            int id = Integer.parseInt(codigoTxt.getText());
+            int id = Integer.parseInt(carnetTxt.getText());
             String name = nombreTxt.getText().trim();
-            int semester = Integer.parseInt(semestreTxt.getText());
-            int credits = Integer.parseInt(creditosTxt.getText());
-            if (!name.equals(""))
+            String address = direccionTxt.getText().trim();
+            if (!name.equals("") && !address.equals(""))
             {
-                if (Manejador.addCurso(id, name, semester, credits))
+                if (Manejador.addEstudiante(id, name, address))
                 {
-                    JOptionPane.showMessageDialog(this, "Se ha agregado al curso: " + name + " correctamente. ");
-                    codigoTxt.setText("");
+                    JOptionPane.showMessageDialog(this, "Se ha agregado al estudiante: " + id + " correctamente. ");
+                    carnetTxt.setText("");
                     nombreTxt.setText("");
-                    semestreTxt.setText("");
-                    creditosTxt.setText("");
-                    Manejador.getListaCursos().mostrarDatos();
+                    direccionTxt.setText("");
+                    System.out.println(Manejador.getTablaEstudiante());
                 } else
                 {
-                    JOptionPane.showMessageDialog(this, "No se ha agregado al curso: " + id + " porque este codigo ya existe. ","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "No se ha agregado el estudiante: " + id + " porque este carnet ya existe. ","Error",JOptionPane.ERROR_MESSAGE);
                 }
             } else
             {
@@ -173,6 +162,10 @@ public class AgregarCurso extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No ingreso los datos correctamente","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void direccionTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccionTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_direccionTxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,40 +188,39 @@ public class AgregarCurso extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(AgregarCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(AgregarCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(AgregarCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(AgregarCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgregarCurso().setVisible(true);
+                new AgregarEstudiante().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField codigoTxt;
-    private javax.swing.JFormattedTextField creditosTxt;
+    private javax.swing.JFormattedTextField carnetTxt;
+    private javax.swing.JTextField direccionTxt;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField nombreTxt;
-    private javax.swing.JFormattedTextField semestreTxt;
     // End of variables declaration//GEN-END:variables
 }

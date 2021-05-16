@@ -216,6 +216,14 @@ public class ListaCircular<T> {
             System.out.println("******* LISTA VACIA *******");
         }
     }
+    
+    public boolean isEmpty(){
+        if(root != null && end != null){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
     private class Nodo<T> {
 
