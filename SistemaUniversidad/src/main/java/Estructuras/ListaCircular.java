@@ -278,6 +278,24 @@ public class ListaCircular<T> {
         }
         return contador;
     }
+    
+    public ArrayList<Asignacion> getAsignacionesEstudiante(int carnet) {
+        ArrayList<Asignacion> asignaciones = new ArrayList<>();
+        if (root != null) {
+            Nodo<T> aux = root;
+
+            do {
+                if (aux.getData() instanceof Asignacion) {
+                    Asignacion asignacion = (Asignacion) aux.getData();
+                    if (asignacion.getEstudiante().getId() == carnet) {
+                        asignaciones.add(asignacion);
+                    }
+                }
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return asignaciones;
+    }
 
     public int getSize() {
         return size;

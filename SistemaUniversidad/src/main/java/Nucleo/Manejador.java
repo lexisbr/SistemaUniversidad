@@ -279,4 +279,8 @@ public class Manejador {
     public static int getAsignacionesSalon(int salon, String edificio) {
         return listaAsignaciones.getAsignacionesSalon(salon, edificio);
     }
+    
+    public static ArrayList<Asignacion> getAsignaciones(int carnet){
+        return listaAsignaciones.getAsignacionesEstudiante(carnet);
+    }
 }

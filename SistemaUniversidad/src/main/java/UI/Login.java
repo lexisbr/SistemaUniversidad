@@ -7,6 +7,7 @@ package UI;
 
 import AdminUI.InicioAdmin;
 import ColabUI.InicioColab;
+import EstudianteUI.InicioEstudiante;
 import Nucleo.Manejador;
 import Objetos.Usuario;
 import javax.swing.JOptionPane;
@@ -148,10 +149,13 @@ public class Login extends javax.swing.JFrame {
             {
                 new InicioColab();
                 this.dispose();
+            }else if(Manejador.getUsuarioActual().getType().equals(Usuario.ESTUDIANTE)){
+                new InicioEstudiante();
+                this.dispose();
             }
         } else
         {
-            JOptionPane.showMessageDialog(this, "Login incorrecto");
+            JOptionPane.showMessageDialog(this, "Login incorrecto","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
