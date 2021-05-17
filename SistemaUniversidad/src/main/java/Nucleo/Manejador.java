@@ -5,13 +5,19 @@
  */
 package Nucleo;
 
+import Estructuras.ArbolAVL;
+import Estructuras.ArbolB;
 import Estructuras.ListaCircular;
 import Estructuras.TablaHash;
+import Objetos.Asignacion;
+import Objetos.Catedratico;
 import Objetos.Curso;
 import Objetos.Edificio;
 import Objetos.Estudiante;
+import Objetos.Horario;
 import Objetos.Salon;
 import Objetos.Usuario;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,11 +29,27 @@ public class Manejador {
     private static ListaCircular<Edificio> listaEdificios = new ListaCircular<Edificio>();
     private static ListaCircular<Curso> listaCursos = new ListaCircular<Curso>();
     private static TablaHash<Estudiante> tablaEstudiantes = new TablaHash<Estudiante>();
+    private static ArbolAVL<Catedratico> arbolCatedraticos = new ArbolAVL<Catedratico>();
+    private static ArbolB<Horario> arbolHorarios = new ArbolB<Horario>(3);
+    private static ListaCircular<Asignacion> listaAsignaciones = new ListaCircular<Asignacion>();
     private static Usuario usuarioActual;
 
     public static void inicializarSistema() {
         listaUsuarios.add(new Usuario(12345, "Alejandro", "1", Usuario.SUPER));
         listaUsuarios.add(new Usuario(123, "Alejandro", "1", Usuario.COLABORADOR));
+        addEstudiante(123, "lexis", "zona1");
+        addEstudiante(1234, "lexis", "zona1");
+        addEstudiante(1235, "lexis", "zona1");
+        listaEdificios.add((new Edificio("edificio1")));
+        addSalonEdificio("edificio1", 1, 2);
+        listaCursos.add(new Curso(1,"ciencias",2,20));
+        arbolCatedraticos.add(new Catedratico(1,"alfredo ","chileverde"));
+        Horario horario = getDataHorario(0, "9:00", "lunes","1", "1", "edificio1", 1);
+        if(horario != null){
+            addHorario(horario);
+        }else{
+            System.out.println("Algo salio mal con el horario");
+        }
     }
 
     public static boolean loginUser(String user, String password) {
@@ -63,7 +85,7 @@ public class Manejador {
      * **
      * METODOS PARA LISTA DE USUARIOS
      */
-    public static boolean addUser(int id, String name, String password, String type,Estudiante estudiante) {
+    public static boolean addUser(int id, String name, String password, String type, Estudiante estudiante) {
         boolean add = listaUsuarios.add(new Usuario(id, name, password, type, estudiante));
         listaUsuarios.mostrarDatos();
         return add;
@@ -149,6 +171,10 @@ public class Manejador {
     public static boolean updateCurso(Curso curso) {
         return listaCursos.update(curso);
     }
+    
+    public static ArrayList<Curso> getCursos(){
+        return listaCursos.getNodes();
+    }
 
     public static ListaCircular<Curso> getListaCursos() {
         return listaCursos;
@@ -172,9 +198,85 @@ public class Manejador {
     public static void updateEstudiante(Estudiante estudiante) {
         tablaEstudiantes.update(estudiante);
     }
+    
+    public static ArrayList<Estudiante> getEstudiantes(){
+        return tablaEstudiantes.getNodes();
+    }
 
     public static TablaHash<Estudiante> getTablaEstudiante() {
         return tablaEstudiantes;
     }
 
+    /**
+     * *
+     * METODOS PARA ARBOL DE CATEDRATICOS
+     */
+    public static ArbolAVL<Catedratico> getArbolCatedraticos() {
+        return arbolCatedraticos;
+    }
+
+    public static boolean addCatedratico(int id, String nombre, String direccion) {
+        return arbolCatedraticos.add(new Catedratico(id, nombre, direccion));
+    }
+
+    public static Catedratico searchCatedratico(int id) {
+        return arbolCatedraticos.getData(id);
+    }
+
+    public static boolean deleteCatedratico(int id) {
+        return arbolCatedraticos.remove(id);
+    }
+
+    public static boolean updateCatedratico(Catedratico catedratico) {
+        return arbolCatedraticos.update(catedratico);
+    }
+    
+    public static ArrayList<Catedratico> getCatedraticos(){
+        return arbolCatedraticos.getNodes();
+    }
+
+    /**
+     * *
+     * METODOS PARA ARBOL DE HORARIOS
+     */
+    public static Horario getDataHorario(int id, String rango, String dia, String cursoId, String salonId, String edificioId, int catedraticoId) {
+        Edificio edificio = listaEdificios.getData(edificioId);
+        Salon salon = edificio.getListaSalones().getData(salonId);
+        Catedratico catedratico = arbolCatedraticos.getData(catedraticoId);
+        Curso curso = listaCursos.getData(cursoId);
+        if (edificio != null && salon != null && catedratico != null && curso != null)
+        {
+            return new Horario(id, rango, dia, curso, salon, edificio, catedratico);
+        } else
+        {
+            return null;
+        }
+    }
+    
+    public static boolean addHorario(Horario horario){
+        return arbolHorarios.insert(horario);
+    }
+
+    public static ArrayList<Horario> getHorarios() {
+        return arbolHorarios.getHorarios();
+    }
+
+    /**
+     * METODOS PARA LISTA DE ASIGNACIONES
+     */
+    public static ListaCircular<Asignacion> getListaAsignaciones(){
+        return listaAsignaciones;
+    }
+    
+    public static boolean addAsignacion(int id, Horario horario, Estudiante estudiante, int zona, int examen_final) {
+        return listaAsignaciones.add(new Asignacion(id, estudiante, zona, examen_final, horario));
+    }
+
+    public static int getAsignacionesSize(){
+        return listaAsignaciones.getSize();
+    }
+    
+    public static int getAsignacionesSalon(int salon, String edificio) {
+        return listaAsignaciones.getAsignacionesSalon(salon, edificio);
+    }
 }

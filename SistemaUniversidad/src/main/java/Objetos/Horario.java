@@ -5,34 +5,40 @@
  */
 package Objetos;
 
+import Estructuras.ListaCircular;
+
 /**
  *
  * @author lex
  */
 public class Horario {
     private int id;
-    private int period;
+    private String period;
     private String day;
-    private int cursoId;
-    private int salonId;
-    private int edificioId;
-    private int catedraticoId;
+    private Curso curso;
+    private Salon salon;
+    private Edificio edificio;
+    private Catedratico catedratico;
 
-    public Horario(int id, int period, String day, int cursoId, int salonId, int edificioId, int catedraticoId) {
+    public Horario(int id) {
+        this.id = id;
+    }
+
+    public Horario(int id, String period, String day, Curso curso, Salon salon, Edificio edificio, Catedratico catedratico) {
         this.id = id;
         this.period = period;
         this.day = day;
-        this.cursoId = cursoId;
-        this.salonId = salonId;
-        this.edificioId = edificioId;
-        this.catedraticoId = catedraticoId;
+        this.curso = curso;
+        this.salon = salon;
+        this.edificio = edificio;
+        this.catedratico = catedratico;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getPeriod() {
+    public String getPeriod() {
         return period;
     }
 
@@ -40,27 +46,27 @@ public class Horario {
         return day;
     }
 
-    public int getCursoId() {
-        return cursoId;
+    public Curso getCurso() {
+        return curso;
     }
 
-    public int getSalonId() {
-        return salonId;
+    public Salon getSalon() {
+        return salon;
     }
 
-    public int getEdificioId() {
-        return edificioId;
+    public Edificio getEdificio() {
+        return edificio;
     }
 
-    public int getCatedraticoId() {
-        return catedraticoId;
+    public Catedratico getCatedratico() {
+        return catedratico;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setPeriod(int period) {
+    public void setPeriod(String period) {
         this.period = period;
     }
 
@@ -68,24 +74,20 @@ public class Horario {
         this.day = day;
     }
 
-    public void setCursoId(int cursoId) {
-        this.cursoId = cursoId;
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
-    public void setSalonId(int salonId) {
-        this.salonId = salonId;
+    public void setSalon(Salon salon) {
+        this.salon = salon;
     }
 
-    public void setEdificioId(int edificioId) {
-        this.edificioId = edificioId;
+    public void setEdificio(Edificio edificio) {
+        this.edificio = edificio;
     }
 
-    public void setCatedraticoId(int catedraticoId) {
-        this.catedraticoId = catedraticoId;
+    public void setCatedratico(Catedratico catedratico) {
+        this.catedratico = catedratico;
     }
-
-    
-    
-    
     
 }

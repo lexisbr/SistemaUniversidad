@@ -6,6 +6,7 @@
 package Estructuras;
 
 import Objetos.Estudiante;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -31,8 +32,8 @@ public class TablaHash<T> {
             array[i] = new List<>();
         }
     }
-    
-    public int getCapacity(){
+
+    public int getCapacity() {
         return CAPACITY;
     }
 
@@ -60,19 +61,6 @@ public class TablaHash<T> {
             }
             index = hashingCollision(id, contador);
             contador++;
-        }
-        return null;
-    }
-
-    public T getData(int id) {
-        int index = hashing(id);
-        List<T> aux_lista = array[index];
-        if (aux_lista.getHead() != null)
-        {
-            if (getId(aux_lista.getHead().val) == id)
-            {
-                return aux_lista.getHead().val;
-            }
         }
         return null;
     }
@@ -162,7 +150,6 @@ public class TablaHash<T> {
     }
 
     public boolean remove(int id) {
-
         int index = hashing(id);
         List<T> aux_list;
         int contador = 0;
@@ -217,7 +204,19 @@ public class TablaHash<T> {
         int hash = ((item % 7) + 1) * i;
         System.out.println("hashing collission " + hash);
         return hash;
+    }
 
+    public ArrayList<T> getNodes() {
+        ArrayList<T> lista = new ArrayList<>();
+        for (int i = 0; i < array.length; i++)
+        {
+            if (array[i].getHead() != null)
+            {
+                lista.add(array[i].getHead().val);
+            }
+
+        }
+        return lista;
     }
 
     public String toString() {

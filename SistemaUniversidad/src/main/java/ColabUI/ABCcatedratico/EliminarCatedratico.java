@@ -3,23 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ColabUI.ABCestudiante;
+package ColabUI.ABCcatedratico;
 
 import Nucleo.Manejador;
-import Objetos.Estudiante;
-import Objetos.Usuario;
+import Objetos.Catedratico;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author lex
  */
-public class EliminarEstudiante extends javax.swing.JFrame {
+public class EliminarCatedratico extends javax.swing.JFrame {
+
+    Catedratico catedraticoSeleccionado;
 
     /**
-     * Creates new form EliminarEstudiante
+     * Creates new form EliminarCatedratico
      */
-    public EliminarEstudiante() {
+    public EliminarCatedratico() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -48,7 +49,7 @@ public class EliminarEstudiante extends javax.swing.JFrame {
         nombreTxt = new javax.swing.JTextField();
         direccionTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        carnetTxt = new javax.swing.JTextField();
+        idTxt = new javax.swing.JTextField();
         eliminarButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
@@ -59,13 +60,13 @@ public class EliminarEstudiante extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Liberation Serif", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Eliminar Estudiante");
+        jLabel2.setText("Eliminar Catedratico");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel3.setText("Carnet:");
+        jLabel3.setText("ID:");
 
         jButton2.setText("Buscar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +106,7 @@ public class EliminarEstudiante extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 370, 110));
 
-        jLabel6.setText("Eliminar estudiante");
+        jLabel6.setText("Eliminar catedratico");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -121,12 +122,12 @@ public class EliminarEstudiante extends javax.swing.JFrame {
         direccionTxt.setEditable(false);
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel7.setText("Carnet:");
+        jLabel7.setText("ID:");
 
-        carnetTxt.setEditable(false);
-        carnetTxt.addActionListener(new java.awt.event.ActionListener() {
+        idTxt.setEditable(false);
+        idTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                carnetTxtActionPerformed(evt);
+                idTxtActionPerformed(evt);
             }
         });
 
@@ -160,7 +161,7 @@ public class EliminarEstudiante extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
-                                .addComponent(carnetTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -171,7 +172,7 @@ public class EliminarEstudiante extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(carnetTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -188,7 +189,7 @@ public class EliminarEstudiante extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 370, 230));
 
-        jLabel8.setText("Busqueda de estudiante");
+        jLabel8.setText("Busqueda de catedratico");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 500));
@@ -200,42 +201,48 @@ public class EliminarEstudiante extends javax.swing.JFrame {
         // TODO add your handling code here:
         try
         {
-            int carnet = Integer.parseInt(searchTxt.getText());
-            Estudiante student = Manejador.searchEstudiante(carnet);
-            if (student != null)
+            int id = Integer.parseInt(searchTxt.getText());
+            Catedratico catedratico = Manejador.searchCatedratico(id);
+            if (catedratico != null)
             {
-                carnetTxt.setText(String.valueOf(student.getId()));
-                nombreTxt.setText(student.getName());
-                direccionTxt.setText(student.getAddress());
+                catedraticoSeleccionado = catedratico;
+                idTxt.setText(String.valueOf(catedratico.getId()));
+                nombreTxt.setText(catedratico.getName());
+                direccionTxt.setText(catedratico.getAddress());
                 searchTxt.setText("");
                 eliminarButton.setEnabled(true);
             } else
             {
-                JOptionPane.showMessageDialog(this, "El estudiante no existe","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El estudiante no existe", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(this, "El carnet debe ser numerico","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El carnet debe ser numerico", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void carnetTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carnetTxtActionPerformed
+    private void idTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_carnetTxtActionPerformed
+    }//GEN-LAST:event_idTxtActionPerformed
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(carnetTxt.getText());
-        if(Manejador.deleteEstudiante(id)){
-            JOptionPane.showMessageDialog(this, "Se ha eliminado correctamente el estudiante");
-            System.out.println(Manejador.getTablaEstudiante());
-            eliminarButton.setEnabled(false);
-            carnetTxt.setText("");
-            nombreTxt.setText("");
-            direccionTxt.setText("");
-        }else{
-            JOptionPane.showMessageDialog(this, "No se ha podido eliminar correctamente","Error",JOptionPane.ERROR_MESSAGE);
+        if (catedraticoSeleccionado != null)
+        {
+            if (Manejador.deleteCatedratico(catedraticoSeleccionado.getId()))
+            {
+                JOptionPane.showMessageDialog(this, "Se ha eliminado correctamente el catedratico");
+                eliminarButton.setEnabled(false);
+                idTxt.setText("");
+                nombreTxt.setText("");
+                direccionTxt.setText("");
+                catedraticoSeleccionado = null;
+                Manejador.getArbolCatedraticos().showTree();
+            } else
+            {
+                JOptionPane.showMessageDialog(this, "No se ha podido eliminar correctamente", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_eliminarButtonActionPerformed
 
@@ -260,31 +267,31 @@ public class EliminarEstudiante extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(EliminarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarCatedratico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(EliminarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarCatedratico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(EliminarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarCatedratico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(EliminarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarCatedratico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EliminarEstudiante().setVisible(true);
+                new EliminarCatedratico().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField carnetTxt;
     private javax.swing.JTextField direccionTxt;
     private javax.swing.JButton eliminarButton;
+    private javax.swing.JTextField idTxt;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

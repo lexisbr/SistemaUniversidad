@@ -8,6 +8,7 @@ package AdminUI;
 import AdminUI.ABCcurso.AgregarCurso;
 import AdminUI.ABCcurso.EditarCurso;
 import AdminUI.ABCcurso.EliminarCurso;
+import AdminUI.ABCcurso.VerCursos;
 import AdminUI.ABCedificio.AgregarEdificio;
 import AdminUI.ABCedificio.EliminarEdificio;
 import AdminUI.ABCsalon.AgregarSalon;
@@ -74,6 +75,7 @@ public class InicioAdmin extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
 
@@ -230,6 +232,14 @@ public class InicioAdmin extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem11);
 
+        jMenuItem15.setText("Visualizar");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem15);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Cuenta");
@@ -321,6 +331,11 @@ public class InicioAdmin extends javax.swing.JFrame {
         new Login();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        // TODO add your handling code here:
+        new VerCursos();
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -382,6 +397,7 @@ public class InicioAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

@@ -6,6 +6,7 @@
 package Estructuras;
 
 import Objetos.Catedratico;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,23 +14,10 @@ import Objetos.Catedratico;
  */
 public class ArbolAVL<T> {
 
-    public static void main(String[] args) {
-        ArbolAVL<Catedratico> arbol = new ArbolAVL<Catedratico>();
-        arbol.add(new Catedratico(1, "hola", "gordos"));
-        arbol.add(new Catedratico(2, "hola", "gordos"));
-        arbol.add(new Catedratico(3, "hola", "gordos"));
-        arbol.add(new Catedratico(4, "hola", "gordos"));
-        arbol.add(new Catedratico(5, "hola", "gordos"));
-        arbol.showTree();
-        arbol.remove(2);
-        arbol.remove(4);
-        arbol.remove(1);
-        arbol.showTree();
-    }
-
     private Nodo<T> root;
-    private boolean nodeExists = false;
+    private boolean nodeAdded = false;
     private boolean nodeDeleted = false;
+    private ArrayList<T> listaNodos;
 
     public ArbolAVL() {
         this.root = null;
@@ -47,8 +35,8 @@ public class ArbolAVL<T> {
         }
         return 0;
     }
-    
-    public int getDataId(T data){
+
+    public int getDataId(T data) {
         if (data instanceof Catedratico)
         {
             return ((Catedratico) data).getId();
@@ -57,7 +45,7 @@ public class ArbolAVL<T> {
     }
 
     public boolean remove(int id) {
-        nodeDeleted=false;
+        nodeDeleted = false;
         root = delete(root, id);
         return nodeDeleted;
     }
@@ -139,9 +127,9 @@ public class ArbolAVL<T> {
     }
 
     public boolean add(T data) {
-        nodeExists = false;
+        nodeAdded = true;
         root = insert(root, new Nodo<T>(data));
-        return nodeExists;
+        return nodeAdded;
     }
 
     private Nodo<T> insert(Nodo<T> actualNode, Nodo<T> newNode) {
@@ -158,7 +146,7 @@ public class ArbolAVL<T> {
             actualNode.setRight(insert(actualNode.getRight(), newNode));
         } else
         {
-            nodeExists = true;
+            nodeAdded = false;
             return actualNode;
         }
 
@@ -190,8 +178,17 @@ public class ArbolAVL<T> {
 
         return actualNode;
     }
-    
-    public Nodo<T> getData(int id) {
+
+    public T getData(int id) {
+        Nodo<T> data = search(root, id);
+        if (data != null)
+        {
+            return search(root, id).getData();
+        }
+        return null;
+    }
+
+    public Nodo<T> getNode(int id) {
         return search(root, id);
     }
 
@@ -211,8 +208,25 @@ public class ArbolAVL<T> {
         }
     }
 
+    public ArrayList<T> getNodes() {
+        listaNodos = new ArrayList<>();
+        getNodesData(root);
+        return listaNodos;
+    }
+
+    private void getNodesData(Nodo<T> nodo) {
+        if (nodo == null)
+        {
+            return;
+        }
+
+        getNodesData(nodo.getLeft());
+        listaNodos.add(nodo.getData());
+        getNodesData(nodo.getRight());
+    }
+
     public boolean update(T data) {
-        Nodo<T> node = getData(getDataId(data));
+        Nodo<T> node = getNode(getDataId(data));
 
         if (node != null)
         {
@@ -223,7 +237,7 @@ public class ArbolAVL<T> {
             return false;
         }
     }
-    
+
     private Nodo<T> rightRotation(Nodo<T> actualNode) {
         Nodo<T> newRoot = actualNode.getLeft();
         Nodo<T> aux = newRoot.getRight();
@@ -271,7 +285,7 @@ public class ArbolAVL<T> {
 
         return getHeight(actualNode.getRight()) - getHeight(actualNode.getLeft());
     }
-    
+
     private Nodo<T> getBigest(Nodo<T> nodo) {
         Nodo<T> actualNodo = nodo;
 

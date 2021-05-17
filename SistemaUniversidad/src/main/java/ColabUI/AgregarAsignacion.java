@@ -3,27 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ColabUI.ABCestudiante;
+package ColabUI;
 
 import Nucleo.Manejador;
+import Objetos.Edificio;
 import Objetos.Estudiante;
-import Objetos.Usuario;
+import Objetos.Horario;
+import Objetos.Salon;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author lex
  */
-public class EliminarEstudiante extends javax.swing.JFrame {
+public class AgregarAsignacion extends javax.swing.JFrame {
+
+    private Estudiante estudianteSeleccionado;
+    private ArrayList<Horario> listaHorarios;
 
     /**
-     * Creates new form EliminarEstudiante
+     * Creates new form Asignaciones
      */
-    public EliminarEstudiante() {
+    public AgregarAsignacion() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.pack();
+        cargarCombo();
     }
 
     /**
@@ -45,11 +52,13 @@ public class EliminarEstudiante extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        nombreTxt = new javax.swing.JTextField();
-        direccionTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         carnetTxt = new javax.swing.JTextField();
-        eliminarButton = new javax.swing.JButton();
+        subirButton = new javax.swing.JButton();
+        horarioCombo = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        finalTxt = new javax.swing.JFormattedTextField();
+        zonaTxt = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -59,7 +68,7 @@ public class EliminarEstudiante extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Liberation Serif", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Eliminar Estudiante");
+        jLabel2.setText("Asignar Estudiante");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 50));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -105,20 +114,16 @@ public class EliminarEstudiante extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 370, 110));
 
-        jLabel6.setText("Eliminar estudiante");
+        jLabel6.setText("Asignar curso");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel5.setText("Nombre:");
+        jLabel5.setText("Horario:");
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel1.setText("Direccion:");
-
-        nombreTxt.setEditable(false);
-
-        direccionTxt.setEditable(false);
+        jLabel1.setText("Zona:");
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel7.setText("Carnet:");
@@ -130,13 +135,24 @@ public class EliminarEstudiante extends javax.swing.JFrame {
             }
         });
 
-        eliminarButton.setText("Eliminar");
-        eliminarButton.setEnabled(false);
-        eliminarButton.addActionListener(new java.awt.event.ActionListener() {
+        subirButton.setText("Subir");
+        subirButton.setEnabled(false);
+        subirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarButtonActionPerformed(evt);
+                subirButtonActionPerformed(evt);
             }
         });
+
+        horarioCombo.setEnabled(false);
+
+        jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jLabel4.setText("Final:");
+
+        finalTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#"))));
+        finalTxt.setEnabled(false);
+
+        zonaTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#"))));
+        zonaTxt.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -150,21 +166,21 @@ public class EliminarEstudiante extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel1)
-                                    .addComponent(jLabel5))
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(direccionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(nombreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(horarioCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(finalTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(zonaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
                                 .addComponent(carnetTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGap(100, 100, 100)
+                        .addComponent(subirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,17 +192,21 @@ public class EliminarEstudiante extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(nombreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(horarioCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(direccionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(zonaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(finalTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(subirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 370, 230));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 370, 250));
 
         jLabel8.setText("Busqueda de estudiante");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
@@ -204,19 +224,21 @@ public class EliminarEstudiante extends javax.swing.JFrame {
             Estudiante student = Manejador.searchEstudiante(carnet);
             if (student != null)
             {
+                estudianteSeleccionado = student;
                 carnetTxt.setText(String.valueOf(student.getId()));
-                nombreTxt.setText(student.getName());
-                direccionTxt.setText(student.getAddress());
                 searchTxt.setText("");
-                eliminarButton.setEnabled(true);
+                subirButton.setEnabled(true);
+                horarioCombo.setEnabled(true);
+                zonaTxt.setEnabled(true);
+                finalTxt.setEnabled(true);
             } else
             {
-                JOptionPane.showMessageDialog(this, "El estudiante no existe","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El estudiante no existe", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(this, "El carnet debe ser numerico","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El carnet debe ser numerico", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -224,20 +246,36 @@ public class EliminarEstudiante extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_carnetTxtActionPerformed
 
-    private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
+    private void subirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirButtonActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(carnetTxt.getText());
-        if(Manejador.deleteEstudiante(id)){
-            JOptionPane.showMessageDialog(this, "Se ha eliminado correctamente el estudiante");
-            System.out.println(Manejador.getTablaEstudiante());
-            eliminarButton.setEnabled(false);
-            carnetTxt.setText("");
-            nombreTxt.setText("");
-            direccionTxt.setText("");
-        }else{
-            JOptionPane.showMessageDialog(this, "No se ha podido eliminar correctamente","Error",JOptionPane.ERROR_MESSAGE);
+        try
+        {
+            int zona = Integer.parseInt(zonaTxt.getText());
+            int examenFinal = Integer.parseInt(finalTxt.getText());
+            int index_horario = horarioCombo.getSelectedIndex();
+            Horario horario = listaHorarios.get(index_horario);
+            Salon salon = horario.getSalon();
+            Edificio edificio = horario.getEdificio();
+            if (salon.getSize() > Manejador.getAsignacionesSalon(salon.getId(), edificio.getName()))
+            {
+                Manejador.addAsignacion(Manejador.getAsignacionesSize(), horario, estudianteSeleccionado, zona, examenFinal);
+                JOptionPane.showMessageDialog(this, "La asignacion fue realizada correctamente");
+                carnetTxt.setText("");
+                zonaTxt.setText("");
+                finalTxt.setText("");
+                estudianteSeleccionado = null;
+                Manejador.getListaAsignaciones().mostrarDatos();
+            } else
+            {
+                JOptionPane.showMessageDialog(this, "Este salon ya alcanzo la capacidad maxima de alumnos","Error",JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "No ingreso correctamente los datos","Error",JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_eliminarButtonActionPerformed
+    }//GEN-LAST:event_subirButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,35 +298,47 @@ public class EliminarEstudiante extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(EliminarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarAsignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(EliminarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarAsignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(EliminarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarAsignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(EliminarEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarAsignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EliminarEstudiante().setVisible(true);
+                new AgregarAsignacion().setVisible(true);
             }
         });
     }
 
+    public void cargarCombo() {
+        listaHorarios = Manejador.getHorarios();
+        for (int i = 0; i < listaHorarios.size(); i++)
+        {
+            Horario horario = listaHorarios.get(i);
+            String horarioCadena = horario.getCurso().getName() + ", " + horario.getPeriod() + ", " + horario.getDay() + ", " + horario.getCatedratico().getName();
+            horarioCombo.addItem(horarioCadena);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField carnetTxt;
-    private javax.swing.JTextField direccionTxt;
-    private javax.swing.JButton eliminarButton;
+    private javax.swing.JFormattedTextField finalTxt;
+    private javax.swing.JComboBox<String> horarioCombo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -296,7 +346,8 @@ public class EliminarEstudiante extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField nombreTxt;
     private javax.swing.JFormattedTextField searchTxt;
+    private javax.swing.JButton subirButton;
+    private javax.swing.JFormattedTextField zonaTxt;
     // End of variables declaration//GEN-END:variables
 }

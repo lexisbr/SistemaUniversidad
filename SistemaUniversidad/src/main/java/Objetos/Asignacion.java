@@ -11,24 +11,26 @@ package Objetos;
  */
 public class Asignacion {
 
-    private int studentId;
-    private int horarioId;
+    private int id;
+    private Estudiante estudiante;
     private int zona;
     private int final_test;
+    private Horario horario;
 
-    public Asignacion(int studentId, int horarioId, int zona, int final_test) {
-        this.studentId = studentId;
-        this.horarioId = horarioId;
+    public Asignacion(int id, Estudiante estudiante, int zona, int final_test, Horario horario) {
+        this.id = id;
+        this.estudiante = estudiante;
         this.zona = zona;
         this.final_test = final_test;
+        this.horario = horario;
     }
 
-    public int getStudentId() {
-        return studentId;
+    public int getId() {
+        return id;
     }
 
-    public int getHorarioId() {
-        return horarioId;
+    public Estudiante getEstudiante() {
+        return estudiante;
     }
 
     public int getZona() {
@@ -39,12 +41,16 @@ public class Asignacion {
         return final_test;
     }
 
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
+    public Horario getHorario() {
+        return horario;
     }
 
-    public void setHorarioId(int horarioId) {
-        this.horarioId = horarioId;
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 
     public void setZona(int zona) {
@@ -54,5 +60,11 @@ public class Asignacion {
     public void setFinal_test(int final_test) {
         this.final_test = final_test;
     }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
+    }
+    
+    
 
 }

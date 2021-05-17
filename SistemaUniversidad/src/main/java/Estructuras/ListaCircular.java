@@ -5,10 +5,12 @@
  */
 package Estructuras;
 
+import Objetos.Asignacion;
 import Objetos.Curso;
 import Objetos.Edificio;
-import Objetos.Salon;
+import Objetos.Horario;
 import Objetos.Usuario;
+import java.util.ArrayList;
 
 /**
  *
@@ -83,8 +85,11 @@ public class ListaCircular<T> {
         {
             Curso curso = (Curso) data;
             return String.valueOf(curso.getId());
+        } else if (data instanceof Asignacion)
+        {
+            Asignacion asignacion = (Asignacion) data;
+            return String.valueOf(asignacion.getId());
         }
-
         return null;
     }
 
@@ -169,6 +174,20 @@ public class ListaCircular<T> {
         return false;
     }
 
+    public ArrayList<T> getNodes() {
+        ArrayList<T> lista = new ArrayList<>();
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+            do
+            {
+                lista.add(aux.getData());
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return lista;
+    }
+
     public void mostrarDatos() {
         if (root != null)
         {
@@ -200,7 +219,17 @@ public class ListaCircular<T> {
                     System.out.println("Nombre: " + curso.getName());
                     System.out.println("Semestre: " + curso.getSemester());
                     System.out.println("Creditos: " + curso.getCredits());
+                } else if (aux.getData() instanceof Asignacion)
+                {
+                    Asignacion asignacion = (Asignacion) aux.getData();
+                    System.out.println("************ ASIGNACION ************");
+                    System.out.println("Codigo: " + asignacion.getId());
+                    System.out.println("Horario: " + asignacion.getHorario().getPeriod());
+                    System.out.println("Estudiante: " + asignacion.getEstudiante().getId());
+                    System.out.println("Zona: " + asignacion.getZona());
+                    System.out.println("Final: " + asignacion.getFinal_test());
                 }
+
                 if (aux.getNext() != null)
                 {
                     System.out.println("Siguiente: " + getId(aux.getNext().getData()));
@@ -216,13 +245,42 @@ public class ListaCircular<T> {
             System.out.println("******* LISTA VACIA *******");
         }
     }
-    
-    public boolean isEmpty(){
-        if(root != null && end != null){
+
+    public boolean isEmpty() {
+        if (root != null && end != null)
+        {
             return false;
-        }else{
+        } else
+        {
             return true;
         }
+    }
+
+    public int getAsignacionesSalon(int salon, String edificio) {
+        int contador = 0;
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+            do
+            {
+                if (aux.getData() instanceof Asignacion)
+                {
+                    Asignacion asignacion = (Asignacion) aux.getData();
+                    Horario horario = asignacion.getHorario();
+
+                    if (horario.getEdificio().getName().equals(edificio) && horario.getSalon().getId() == salon)
+                    {
+                        contador++;
+                    }
+                    aux = aux.getNext();
+                }
+            } while (aux != root);
+        }
+        return contador;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     private class Nodo<T> {
