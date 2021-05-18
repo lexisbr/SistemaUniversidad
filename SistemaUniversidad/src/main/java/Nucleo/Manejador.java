@@ -36,7 +36,7 @@ public class Manejador {
 
     public static void inicializarSistema() {
         listaUsuarios.add(new Usuario(12345, "Alejandro", "1", Usuario.SUPER));
-        listaUsuarios.add(new Usuario(123, "Alejandro", "1", Usuario.COLABORADOR));
+        /*listaUsuarios.add(new Usuario(123, "Alejandro", "1", Usuario.COLABORADOR));
         addEstudiante(123, "lexis", "zona1");
         addEstudiante(1234, "lexis", "zona1");
         addEstudiante(1235, "lexis", "zona1");
@@ -49,7 +49,7 @@ public class Manejador {
             addHorario(horario);
         }else{
             System.out.println("Algo salio mal con el horario");
-        }
+        }*/
     }
 
     public static boolean loginUser(String user, String password) {
@@ -87,7 +87,7 @@ public class Manejador {
      */
     public static boolean addUser(int id, String name, String password, String type, Estudiante estudiante) {
         boolean add = listaUsuarios.add(new Usuario(id, name, password, type, estudiante));
-        listaUsuarios.mostrarDatos();
+       // listaUsuarios.mostrarDatos();
         return add;
     }
 
@@ -104,6 +104,10 @@ public class Manejador {
         return listaUsuarios.update(user);
     }
 
+    public static ListaCircular<Usuario> getListaUsuario() {
+        return listaUsuarios;
+    }
+
     public static boolean isEmptyUser() {
         return listaUsuarios.isEmpty();
     }
@@ -113,7 +117,7 @@ public class Manejador {
      */
     public static boolean addEdificio(String name) {
         boolean add = listaEdificios.add(new Edificio(name));
-        listaEdificios.mostrarDatos();
+        //listaEdificios.mostrarDatos();
         return add;
     }
 
@@ -135,7 +139,11 @@ public class Manejador {
      */
     public static boolean addSalonEdificio(String name, int numero_salon, int capacidad) {
         Edificio edificio = listaEdificios.getData(name);
-        return edificio.getListaSalones().add(new Salon(numero_salon, capacidad));
+        if (edificio != null)
+        {
+            return edificio.getListaSalones().add(new Salon(numero_salon, capacidad));
+        }
+        return false;
     }
 
     public static boolean deleteSalonEdificio(String name, String numero_salon) {
@@ -171,8 +179,8 @@ public class Manejador {
     public static boolean updateCurso(Curso curso) {
         return listaCursos.update(curso);
     }
-    
-    public static ArrayList<Curso> getCursos(){
+
+    public static ArrayList<Curso> getCursos() {
         return listaCursos.getNodes();
     }
 
@@ -198,8 +206,8 @@ public class Manejador {
     public static void updateEstudiante(Estudiante estudiante) {
         tablaEstudiantes.update(estudiante);
     }
-    
-    public static ArrayList<Estudiante> getEstudiantes(){
+
+    public static ArrayList<Estudiante> getEstudiantes() {
         return tablaEstudiantes.getNodes();
     }
 
@@ -230,8 +238,8 @@ public class Manejador {
     public static boolean updateCatedratico(Catedratico catedratico) {
         return arbolCatedraticos.update(catedratico);
     }
-    
-    public static ArrayList<Catedratico> getCatedraticos(){
+
+    public static ArrayList<Catedratico> getCatedraticos() {
         return arbolCatedraticos.getNodes();
     }
 
@@ -252,35 +260,43 @@ public class Manejador {
             return null;
         }
     }
-    
-    public static boolean addHorario(Horario horario){
+
+    public static Horario searchHorario(int id) {
+        return (Horario) arbolHorarios.searchByKey(id);
+    }
+
+    public static boolean addHorario(Horario horario) {
         return arbolHorarios.insert(horario);
     }
 
     public static ArrayList<Horario> getHorarios() {
         return arbolHorarios.getHorarios();
     }
+    
+    public static ArbolB<Horario> getArbolHorario(){
+        return arbolHorarios;
+    }
 
     /**
      * METODOS PARA LISTA DE ASIGNACIONES
      */
-    public static ListaCircular<Asignacion> getListaAsignaciones(){
+    public static ListaCircular<Asignacion> getListaAsignaciones() {
         return listaAsignaciones;
     }
-    
+
     public static boolean addAsignacion(int id, Horario horario, Estudiante estudiante, int zona, int examen_final) {
         return listaAsignaciones.add(new Asignacion(id, estudiante, zona, examen_final, horario));
     }
 
-    public static int getAsignacionesSize(){
+    public static int getAsignacionesSize() {
         return listaAsignaciones.getSize();
     }
-    
+
     public static int getAsignacionesSalon(int salon, String edificio) {
         return listaAsignaciones.getAsignacionesSalon(salon, edificio);
     }
-    
-    public static ArrayList<Asignacion> getAsignaciones(int carnet){
+
+    public static ArrayList<Asignacion> getAsignaciones(int carnet) {
         return listaAsignaciones.getAsignacionesEstudiante(carnet);
     }
 }

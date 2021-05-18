@@ -10,8 +10,8 @@ package Objetos;
  * @author lex
  */
 public class Usuario {
-    public static final String COLABORADOR = "Colaborador";
-    public static final String ESTUDIANTE = "Estudiante";
+    public static final String COLABORADOR = "colaborador";
+    public static final String ESTUDIANTE = "estudiante";
     public static final String SUPER = "Super";
     
     private int id;

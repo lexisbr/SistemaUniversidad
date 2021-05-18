@@ -1,0 +1,127 @@
+package Analizadores;
+
+import java_cup.runtime.Symbol;
+import Objetos.*;
+import java.util.ArrayList;
+
+parser code {:
+
+    private ArrayList<Estudiante> listaEstudiantes = new ArrayList<>();
+    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+    private ArrayList<Catedratico> listaCatedraticos = new ArrayList<>();
+    private ArrayList<Edificio> listaEdificios = new ArrayList<>();
+    private ArrayList<Salon> listaSalones = new ArrayList<>();
+    private ArrayList<Curso> listaCursos = new ArrayList<>();
+    private ArrayList<Horario> listaHorarios = new ArrayList<>();
+    private ArrayList<Asignacion> listaAsignaciones = new ArrayList<>();
+    public Parser(Lexer lex){
+        super(lex);
+    }
+ 
+    @Override
+    public void syntax_error(Symbol st) {
+        Token error = (Token) st.value;
+        report_error("Error Sintactico con el Token:"+ error.getLexeme()+" este no pertenece a la estructura  >linea: "+error.getLine()+" >columna: "+error.getColumn() + "\n",null);
+    }
+
+    public ArrayList<Estudiante> getListaEstudiantes(){
+        return listaEstudiantes;
+    }
+
+    public ArrayList<Usuario> getListaUsuarios(){
+        return listaUsuarios;
+    }
+
+    public ArrayList<Catedratico> getListaCatedraticos(){
+        return listaCatedraticos;
+    }
+    
+    public ArrayList<Edificio> getListaEdificios(){
+        return listaEdificios;
+    }
+
+    public ArrayList<Salon> getListaSalones(){
+        return listaSalones;
+    }
+
+    public ArrayList<Curso> getListaCursos(){
+        return listaCursos;
+    }
+
+    public ArrayList<Horario> getListaHorarios(){
+        return listaHorarios;
+    }
+
+    public ArrayList<Asignacion> getListaAsignaciones(){
+        return listaAsignaciones;
+    }
+
+:};
+
+non terminal s0,s1,s2;
+terminal Token ESTUDIANTE,PARENTESIS_A,PARENTESIS_C,NUMERO,COMILLAS,PUNTOCOMA,USUARIO;
+terminal Token STRING_S,ID,COMA,CATEDRATICO,EDIFICIO,SALON,CURSO,HORARIO,ASIGNAR;
+start with s0;
+
+s0 ::= s1 s0
+    |
+;
+
+s1 ::= ESTUDIANTE PARENTESIS_A NUMERO:carnet COMA STRING_S:nombre COMA STRING_S:direccion PARENTESIS_C PUNTOCOMA {:
+        String nombreFinal = nombre.getLexeme().replace("\"", "");
+        String direccionFinal = direccion.getLexeme().replace("\"", "");
+        System.out.println(carnet.getLexeme()+" + "+nombreFinal+" + "+direccionFinal);
+        listaEstudiantes.add(new Estudiante(Integer.parseInt(carnet.getLexeme()),nombreFinal,direccionFinal));
+    :}
+    | USUARIO PARENTESIS_A NUMERO:id COMA STRING_S:nombre COMA STRING_S:password COMA ID:tipo PARENTESIS_C PUNTOCOMA {:
+        int idFinal = Integer.parseInt(id.getLexeme());
+        String nombreFinal = nombre.getLexeme().replace("\"", "");
+        String passwordFinal = password.getLexeme().replace("\"", "");
+        String tipoFinal = tipo.getLexeme();
+        listaUsuarios.add(new Usuario(idFinal,nombreFinal,passwordFinal,tipoFinal));
+    :}
+    | CATEDRATICO PARENTESIS_A NUMERO:id COMA STRING_S:nombre COMA STRING_S:direccion PARENTESIS_C PUNTOCOMA {:
+        int idFinal = Integer.parseInt(id.getLexeme());
+        String nombreFinal = nombre.getLexeme().replace("\"", "");
+        String direccionFinal = direccion.getLexeme().replace("\"", "");
+        listaCatedraticos.add(new Catedratico(idFinal,nombreFinal,direccionFinal));
+    :}
+    | EDIFICIO PARENTESIS_A STRING_S:nombre PARENTESIS_C PUNTOCOMA {:
+        String nombreFinal = nombre.getLexeme().replace("\"", "");
+        listaEdificios.add(new Edificio(nombreFinal));
+    :}
+    | SALON PARENTESIS_A STRING_S:edificio COMA NUMERO:numero COMA NUMERO:capacidad PARENTESIS_C PUNTOCOMA {:
+        int numeroFinal = Integer.parseInt(numero.getLexeme());
+        int capacidadFinal = Integer.parseInt(capacidad.getLexeme());
+        String edificioFinal = edificio.getLexeme().replace("\"", "");
+        listaSalones.add(new Salon(numeroFinal,capacidadFinal,edificioFinal));
+    :}
+    | CURSO PARENTESIS_A NUMERO:id COMA STRING_S:nombre COMA NUMERO:semestre COMA NUMERO:creditos PARENTESIS_C PUNTOCOMA {:
+        int idFinal = Integer.parseInt(id.getLexeme());
+        String nombreFinal = nombre.getLexeme().replace("\"", "");
+        int semestreFinal = Integer.parseInt(semestre.getLexeme());
+        int creditosFinal = Integer.parseInt(creditos.getLexeme());
+
+        listaCursos.add(new Curso(idFinal,nombreFinal,semestreFinal,creditosFinal));
+    :}
+    | HORARIO PARENTESIS_A NUMERO:id COMA STRING_S:periodo COMA STRING_S:dia COMA NUMERO:curso COMA NUMERO:salon COMA ID:edificio COMA NUMERO:catedratico PARENTESIS_C PUNTOCOMA{:
+        int idFinal = Integer.parseInt(id.getLexeme());
+        String periodoFinal = periodo.getLexeme().replace("\"", "");
+        String diaFinal = dia.getLexeme().replace("\"", "");
+        int cursoFinal = Integer.parseInt(curso.getLexeme());
+        int salonFinal = Integer.parseInt(salon.getLexeme());
+        String edificioFinal = edificio.getLexeme();
+        int catedraticoFinal = Integer.parseInt(catedratico.getLexeme());
+
+        listaHorarios.add(new Horario(idFinal,periodoFinal,diaFinal,cursoFinal,salonFinal,edificioFinal,catedraticoFinal));
+    :}
+    | ASIGNAR PARENTESIS_A NUMERO:carnet COMA NUMERO:horario COMA NUMERO:zona COMA NUMERO:examen PARENTESIS_C PUNTOCOMA {:
+        int carnetFinal = Integer.parseInt(carnet.getLexeme());
+        int horarioFinal = Integer.parseInt(horario.getLexeme());
+        int zonaFinal = Integer.parseInt(zona.getLexeme());
+        int examenFinal = Integer.parseInt(examen.getLexeme());
+
+        listaAsignaciones.add(new Asignacion(zonaFinal,examenFinal,carnetFinal,horarioFinal));
+    :}
+    |error
+;

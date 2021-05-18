@@ -88,11 +88,9 @@ public class TablaHash<T> {
 
         if (contains(data))
         {
-            System.out.println("Contains");
             int cont = 0;
             while (containsColission(getId(data), cont))
             {
-                System.out.println("ContainsColission");
                 cont++;
             }
             addItemColission(data, cont);
@@ -196,13 +194,11 @@ public class TablaHash<T> {
 
     public int hashing(int item) {
         int hash = item % CAPACITY;
-        System.out.println("hashing " + hash);
         return hash;
     }
 
     public int hashingCollision(int item, int i) {
         int hash = ((item % 7) + 1) * i;
-        System.out.println("hashing collission " + hash);
         return hash;
     }
 

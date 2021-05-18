@@ -12,6 +12,7 @@ import Estructuras.ListaCircular;
  * @author lex
  */
 public class Horario {
+
     private int id;
     private String period;
     private String day;
@@ -19,6 +20,10 @@ public class Horario {
     private Salon salon;
     private Edificio edificio;
     private Catedratico catedratico;
+    private int cursoId;
+    private int salonId;
+    private String edificioId;
+    private int catedraticoId;
 
     public Horario(int id) {
         this.id = id;
@@ -32,6 +37,32 @@ public class Horario {
         this.salon = salon;
         this.edificio = edificio;
         this.catedratico = catedratico;
+    }
+
+    public Horario(int id, String period, String day, int cursoId, int salonId, String edificioId, int catedraticoId) {
+        this.id = id;
+        this.period = period;
+        this.day = day;
+        this.cursoId = cursoId;
+        this.salonId = salonId;
+        this.edificioId = edificioId;
+        this.catedraticoId = catedraticoId;
+    }
+
+    public int getCursoId() {
+        return cursoId;
+    }
+
+    public int getSalonId() {
+        return salonId;
+    }
+
+    public String getEdificioId() {
+        return edificioId;
+    }
+
+    public int getCatedraticoId() {
+        return catedraticoId;
     }
 
     public int getId() {
@@ -89,5 +120,21 @@ public class Horario {
     public void setCatedratico(Catedratico catedratico) {
         this.catedratico = catedratico;
     }
-    
+
+    public void setCursoId(int cursoId) {
+        this.cursoId = cursoId;
+    }
+
+    public void setSalonId(int salonId) {
+        this.salonId = salonId;
+    }
+
+    public void setEdificioId(String edificioId) {
+        this.edificioId = edificioId;
+    }
+
+    public void setCatedraticoId(int catedraticoId) {
+        this.catedraticoId = catedraticoId;
+    }
+
 }

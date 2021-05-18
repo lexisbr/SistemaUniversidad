@@ -143,7 +143,7 @@ public class AgregarUsuario extends javax.swing.JFrame {
         {
             int id = Integer.parseInt(idTxt.getText());
             String name = nombreTxt.getText().trim();
-            String type = tipoTxt.getSelectedItem().toString();
+            String type = tipoTxt.getSelectedItem().toString().toLowerCase();
             String password = passwordTxt.getText();
             if (!name.equals("") && !type.equals("") && !password.equals(""))
             {

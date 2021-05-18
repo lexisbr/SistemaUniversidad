@@ -14,27 +14,6 @@ import java.util.ArrayList;
  */
 public class ArbolB<T> {
 
-    public static void main(String[] args) {
-        ArbolB<Horario> arbol = new ArbolB<Horario>(3);
-        arbol.insert(new Horario(20));
-        arbol.insert(new Horario(10));
-        arbol.insert(new Horario(50));
-        arbol.insert(new Horario(30));
-        arbol.insert(new Horario(40));
-        arbol.insert(new Horario(60));
-        arbol.insert(new Horario(60));
-        arbol.insert(new Horario(70));
-        arbol.insert(new Horario(80));
-        arbol.insert(new Horario(90));
-        arbol.insert(new Horario(90));
-        arbol.showBTree();
-        ArrayList<Horario> horarioslist = arbol.getHorarios();
-        System.out.println();
-        for (int i = 0; i < horarioslist.size(); i++)
-        {
-            System.out.println("Horario: " + horarioslist.get(i).getId());
-        }
-    }
     private Nodo<T> root;
     private ArrayList<Horario> horarios;
     int grado;
