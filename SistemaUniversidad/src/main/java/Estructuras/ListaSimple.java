@@ -1,8 +1,7 @@
 package Estructuras;
 
-import Objetos.Edificio;
 import Objetos.Salon;
-import javax.swing.JOptionPane;
+import java.io.IOException;
 
 /**
  *
@@ -63,8 +62,8 @@ public class ListaSimple<T> {
         }
         return null;
     }
-    
-    private int getNumericId(T data){
+
+    private int getNumericId(T data) {
         if (data instanceof Salon)
         {
             Salon salon = (Salon) data;
@@ -231,7 +230,7 @@ public class ListaSimple<T> {
             System.out.println("************ LISTA VACIA ************");
         }
     }
-    
+
     public void sort() {
         int size = getSize();
         if (size > 1)
@@ -244,7 +243,7 @@ public class ListaSimple<T> {
                 {
                     int id_actual = getNumericId(actual.getData());
                     int id_siguiente = getNumericId(siguiente.getData());
-                    if ( id_actual < id_siguiente )
+                    if (id_actual < id_siguiente)
                     {
                         T data_actual = actual.getData();
                         actual.setData(siguiente.getData());
@@ -259,6 +258,46 @@ public class ListaSimple<T> {
                 }
             }
         }
+    }
+
+    public String graficarSalones(String edificio) throws IOException {
+        String salida = "";
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+            while (aux != null)
+            {
+                if (aux.getData() instanceof Salon)
+                {
+
+                    try
+                    {
+                        Salon salon = (Salon) aux.getData();
+                        Salon salonSiguiente = (Salon) aux.getNext().getData();
+                        salida += "\""+salon.getId() + "_" + edificio + "\"->\"" + salonSiguiente.getId() + "_" + edificio + "\" ; \n";
+                    } catch (Exception e)
+                    {
+                        Salon salon = (Salon) aux.getData();
+                        salida += "\""+salon.getId() + "_" + edificio + "\"; \n";
+                    }
+
+                }
+                aux = aux.getNext();
+            }
+        }
+        return salida;
+    }
+
+    public Nodo<T> getRoot() {
+        return root;
+    }
+
+    public T getRootData() {
+        return root.getData();
+    }
+
+    public void setRoot(Nodo<T> root) {
+        this.root = root;
     }
 
     private class Nodo<T> {

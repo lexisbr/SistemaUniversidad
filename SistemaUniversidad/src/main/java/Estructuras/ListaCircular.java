@@ -5,11 +5,14 @@
  */
 package Estructuras;
 
+import Nucleo.Manejador;
 import Objetos.Asignacion;
 import Objetos.Curso;
 import Objetos.Edificio;
 import Objetos.Horario;
+import Objetos.Salon;
 import Objetos.Usuario;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -278,16 +281,20 @@ public class ListaCircular<T> {
         }
         return contador;
     }
-    
+
     public ArrayList<Asignacion> getAsignacionesEstudiante(int carnet) {
         ArrayList<Asignacion> asignaciones = new ArrayList<>();
-        if (root != null) {
+        if (root != null)
+        {
             Nodo<T> aux = root;
 
-            do {
-                if (aux.getData() instanceof Asignacion) {
+            do
+            {
+                if (aux.getData() instanceof Asignacion)
+                {
                     Asignacion asignacion = (Asignacion) aux.getData();
-                    if (asignacion.getEstudiante().getId() == carnet) {
+                    if (asignacion.getEstudiante().getId() == carnet)
+                    {
                         asignaciones.add(asignacion);
                     }
                 }
@@ -299,6 +306,88 @@ public class ListaCircular<T> {
 
     public int getSize() {
         return size;
+    }
+
+    public void graficarListaCircular() throws IOException {
+        String salida = "digraph G{\n";
+        salida+="graph [compound=true];\n";
+        salida += "style=filled;\n";
+        int contadorSalones = 0;
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+            if (aux.getData() instanceof Usuario)
+            {
+                salida += "label = \" Lista de Usuarios \";\n";
+            } else if (aux.getData() instanceof Curso)
+            {
+                salida += "label = \" Lista de Cursos \";\n";
+            } else if (aux.getData() instanceof Edificio)
+            {
+                salida += "label = \" Lista de Edificios y salones \";\n";
+            }
+            salida += "subgraph Lista { node [shape = rect,height=.1]; label=\"Lista doble circular\"; \n";
+            do
+            {
+                if (aux.getData() instanceof Usuario)
+                {
+
+                    Usuario user = (Usuario) aux.getData();
+                    Usuario userSiguiente = (Usuario) aux.getNext().getData();
+                    Usuario userAnterior = (Usuario) aux.getNext().getPrev().getData();
+                    salida += user.getId() + "->" + userSiguiente.getId() + " [constraint=false]; \n";
+                    salida += userSiguiente.getId() + "->" + userAnterior.getId() + " [constraint=false]; \n";
+                }
+                if (aux.getData() instanceof Curso)
+                {
+                    Curso curso = (Curso) aux.getData();
+                    Curso cursoSiguiente = (Curso) aux.getNext().getData();
+                    Curso cursoAnterior = (Curso) aux.getNext().getPrev().getData();
+                    salida += curso.getId() + "->" + cursoSiguiente.getId() + " [constraint=false]; \n";
+                    salida += cursoSiguiente.getId() + "->" + cursoAnterior.getId() + " [constraint=false]; \n";
+                }
+                if (aux.getData() instanceof Edificio)
+                {
+                    Edificio edificio = (Edificio) aux.getData();
+                    Edificio edificioSiguiente = (Edificio) aux.getNext().getData();
+                    Edificio edificioAnterior = (Edificio) aux.getNext().getPrev().getData();
+                    salida += edificio.getName() + "->" + edificioSiguiente.getName() + " [constraint=false]; \n";
+                    salida += edificioSiguiente.getName() + "->" + edificioAnterior.getName() + " [constraint=false]; \n";
+                    //Salones
+                    ListaSimple<Salon> salones = edificio.getListaSalones();
+                    System.out.println("Contador "+contadorSalones);
+                    salida += "subgraph cluster_" + contadorSalones + "{node [shape = rect,height=.1]; rankdir=LR; label=\"Salones_" + contadorSalones + "\";  \n";
+                    salida += salones.graficarSalones(edificio.getName());
+                    salida += " } \n";
+                    if (salones.getRoot() != null)
+                    {
+                        if (salones.getRootData() instanceof Salon)
+                        {
+                            Salon salon = (Salon) salones.getRootData();
+                            salida += edificio.getName()+ "->\"" + salon.getId()+"_"+edificio.getName()+ "\"[lhead = cluster_" + contadorSalones + "]; \n";
+                        }
+                    }
+                    contadorSalones++;
+                    
+
+                }
+                aux = aux.getNext();
+            } while (aux != root);
+            salida += "}";
+            salida += "}";
+            StringBuffer codigo = new StringBuffer(salida);
+            if (aux.getData() instanceof Usuario)
+            {
+                Manejador.generarGrafo(codigo, "listaUsuarios");
+            } else if (aux.getData() instanceof Curso)
+            {
+                Manejador.generarGrafo(codigo, "listaCursos");
+            } else if (aux.getData() instanceof Edificio)
+            {
+                Manejador.generarGrafo(codigo, "listaEdificios");
+            }
+        }
+
     }
 
     private class Nodo<T> {

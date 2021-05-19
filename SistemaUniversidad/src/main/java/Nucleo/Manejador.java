@@ -17,7 +17,12 @@ import Objetos.Estudiante;
 import Objetos.Horario;
 import Objetos.Salon;
 import Objetos.Usuario;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,14 +41,33 @@ public class Manejador {
 
     public static void inicializarSistema() {
         listaUsuarios.add(new Usuario(12345, "Alejandro", "1", Usuario.SUPER));
-        /*listaUsuarios.add(new Usuario(123, "Alejandro", "1", Usuario.COLABORADOR));
+        listaUsuarios.add(new Usuario(1, "Alejandro", "1", Usuario.COLABORADOR));
+        listaUsuarios.add(new Usuario(2, "Alejandro", "1", Usuario.ESTUDIANTE));
+        listaUsuarios.add(new Usuario(3, "Alejandro", "1", Usuario.ESTUDIANTE));
+        listaUsuarios.add(new Usuario(4, "Alejandro", "1", Usuario.ESTUDIANTE));
+        listaEdificios.add((new Edificio("edificio1")));
+        addSalonEdificio("edificio1", 1, 2);
+        addSalonEdificio("edificio1", 110, 2);
+        listaEdificios.add((new Edificio("edificio2")));
+        addSalonEdificio("edificio2", 1, 2);
+        listaEdificios.add((new Edificio("edificio3")));
+        addSalonEdificio("edificio3", 1, 2);
+        addSalonEdificio("edificio3", 2, 2);
         addEstudiante(123, "lexis", "zona1");
         addEstudiante(1234, "lexis", "zona1");
         addEstudiante(1235, "lexis", "zona1");
-        listaEdificios.add((new Edificio("edificio1")));
-        addSalonEdificio("edificio1", 1, 2);
+        /*arbolCatedraticos.add(new Catedratico(1444, "alfredo ", "chileverde"));
+        arbolCatedraticos.add(new Catedratico(2222222, "alfredo ", "chileverde"));
+        arbolCatedraticos.add(new Catedratico(3233333, "alfredo ", "chileverde"));
+        arbolCatedraticos.add(new Catedratico(4444444, "alfredo ", "chileverde"));
+        arbolCatedraticos.add(new Catedratico(5555555, "alfredo ", "chileverde"));
+        arbolCatedraticos.add(new Catedratico(6666666, "alfredo ", "chileverde"));*/
+ /*listaUsuarios.add(new Usuario(123, "Alejandro", "1", Usuario.COLABORADOR));
+        addEstudiante(123, "lexis", "zona1");
+        addEstudiante(1234, "lexis", "zona1");
+        addEstudiante(1235, "lexis", "zona1");
+        
         listaCursos.add(new Curso(1,"ciencias",2,20));
-        arbolCatedraticos.add(new Catedratico(1,"alfredo ","chileverde"));
         Horario horario = getDataHorario(0, "9:00", "lunes","1", "1", "edificio1", 1);
         if(horario != null){
             addHorario(horario);
@@ -87,7 +111,7 @@ public class Manejador {
      */
     public static boolean addUser(int id, String name, String password, String type, Estudiante estudiante) {
         boolean add = listaUsuarios.add(new Usuario(id, name, password, type, estudiante));
-       // listaUsuarios.mostrarDatos();
+        // listaUsuarios.mostrarDatos();
         return add;
     }
 
@@ -112,6 +136,16 @@ public class Manejador {
         return listaUsuarios.isEmpty();
     }
 
+    public static void getGraficaUsuarios() {
+        try
+        {
+            listaUsuarios.graficarListaCircular();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * METODOS PARA LISTA DE EDIFICIOS
      */
@@ -132,6 +166,16 @@ public class Manejador {
 
     public static ListaCircular<Edificio> getListaEdificios() {
         return listaEdificios;
+    }
+    
+    public static void getGraficaEdificios() {
+        try
+        {
+            listaEdificios.graficarListaCircular();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -187,6 +231,17 @@ public class Manejador {
     public static ListaCircular<Curso> getListaCursos() {
         return listaCursos;
     }
+    
+    public static void getGraficaCursos() {
+        try
+        {
+            listaCursos.graficarListaCircular();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * METODOS PARA TABLA HASH DE ESTUDIANTES
@@ -213,6 +268,18 @@ public class Manejador {
 
     public static TablaHash<Estudiante> getTablaEstudiante() {
         return tablaEstudiantes;
+    }
+    
+    public static void getGraficaEstudiantes(){
+         try
+        {
+            String estudiantes = tablaEstudiantes.toString();
+            String[] datos = estudiantes.split(",");
+            tablaEstudiantes.graficarTabla(datos);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -241,6 +308,10 @@ public class Manejador {
 
     public static ArrayList<Catedratico> getCatedraticos() {
         return arbolCatedraticos.getNodes();
+    }
+
+    public static void getGraficaCatedraticos() {
+        arbolCatedraticos.crearGrafica();
     }
 
     /**
@@ -272,8 +343,8 @@ public class Manejador {
     public static ArrayList<Horario> getHorarios() {
         return arbolHorarios.getHorarios();
     }
-    
-    public static ArbolB<Horario> getArbolHorario(){
+
+    public static ArbolB<Horario> getArbolHorario() {
         return arbolHorarios;
     }
 
@@ -299,4 +370,54 @@ public class Manejador {
     public static ArrayList<Asignacion> getAsignaciones(int carnet) {
         return listaAsignaciones.getAsignacionesEstudiante(carnet);
     }
+
+    /**
+     * METODO PARA GRAFICAR
+     */
+    public static void guardarArchivo(StringBuffer codigo, String path) {
+        FileWriter writer = null;
+        try
+        {
+            writer = new FileWriter(path, true);
+            BufferedWriter out = new BufferedWriter(writer);
+            out.write("");
+            out.write(codigo.toString());
+            out.close();
+        } catch (IOException e)
+        {
+            JOptionPane.showMessageDialog(null, "No se pudo guardar el archivo");
+        } finally
+        {
+            try
+            {
+                writer.close();
+            } catch (IOException ex)
+            {
+                JOptionPane.showMessageDialog(null, "No se pudo cerrar el archivo");
+            }
+        }
+    }
+
+    public static void generarGrafo(StringBuffer codigo, String titulo) {
+        try
+        {
+            File imagen = new File("./grafo.dot");
+            if (imagen.exists())
+            {
+                imagen.delete();
+                imagen.createNewFile();
+            } else
+            {
+                imagen.createNewFile();
+            }
+            guardarArchivo(codigo, imagen.getAbsolutePath());
+            String comando = "dot -Tpng grafo.dot -o " + titulo + ".png";
+            Runtime.getRuntime().exec(comando);
+            JOptionPane.showMessageDialog(null, "Se ha generado la imagen exitosamente: \"" + titulo + ".png\" ");
+        } catch (IOException e)
+        {
+            JOptionPane.showMessageDialog(null, "Error al generar imagen");
+        }
+    }
+
 }

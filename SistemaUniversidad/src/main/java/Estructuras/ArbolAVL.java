@@ -5,6 +5,7 @@
  */
 package Estructuras;
 
+import Nucleo.Manejador;
 import Objetos.Catedratico;
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class ArbolAVL<T> {
     private boolean nodeAdded = false;
     private boolean nodeDeleted = false;
     private ArrayList<T> listaNodos;
+    private StringBuffer grafica;
 
     public ArbolAVL() {
         this.root = null;
@@ -159,7 +161,7 @@ public class ArbolAVL<T> {
             return leftRotation(actualNode);
         }
 
-        if (fe < -1 && getId(newNode) > getId(actualNode.getLeft()))
+        if (fe < -1 && getId(newNode) < getId(actualNode.getLeft()))
         {
             return rightRotation(actualNode);
         }
@@ -326,6 +328,48 @@ public class ArbolAVL<T> {
             System.out.println("ARBOL VACIO");
         }
 
+    }
+
+    public void crearGrafica() {
+        grafica = new StringBuffer();
+        grafica.append("digraph G{\n"
+                + "subgraph cluster_0{\n"
+                + "style=filled;\n"
+                + "color=lightgrey;\n"
+                + "node[shape=rect,style=filled,color=white];\n");
+        obtenerGrafica(root);
+        grafica.append("label=\"Arbol de Catedraticos\";\n"
+                + "}\n"
+                + "}\n");
+        Manejador.generarGrafo(grafica, "arbolCatedraticos");
+    }
+
+    private void obtenerGrafica(Nodo<T> nodo) {
+
+        if (nodo == null)
+        {
+            return;
+        }
+        if (nodo.getRight() == null && nodo.getLeft() == null)
+        {
+            Catedratico catedratico = (Catedratico) nodo.getData();
+            grafica.append("\" " + catedratico.getId() + "\n" + catedratico.getName() + "\" ;\n");
+        }
+        obtenerGrafica(nodo.getLeft());
+        if (nodo.getLeft() != null)
+        {
+            Catedratico catedratico = (Catedratico) nodo.getData();
+            Catedratico catedraticoChild = (Catedratico) nodo.getLeft().getData();
+            grafica.append("\" " + catedratico.getId() + "\n" + catedratico.getName() + "\"" + "->" + "\" " + catedraticoChild.getId() + "\n" + catedraticoChild.getName() + "\"" + ";\n");
+        }
+        if (nodo.getRight() != null)
+        {
+            Catedratico catedratico = (Catedratico) nodo.getData();
+            Catedratico catedraticoChild = (Catedratico) nodo.getRight().getData();
+            grafica.append("\" " + catedratico.getId() + "\n" + catedratico.getName() + "\"" + "->" + "\" " + catedraticoChild.getId() + "\n" + catedraticoChild.getName() + "\"" + ";\n");
+        }
+
+        obtenerGrafica(nodo.getRight());
     }
 
     private class Nodo<T> {

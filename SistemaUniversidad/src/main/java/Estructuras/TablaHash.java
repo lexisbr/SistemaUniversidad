@@ -5,7 +5,9 @@
  */
 package Estructuras;
 
+import Nucleo.Manejador;
 import Objetos.Estudiante;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -222,6 +224,38 @@ public class TablaHash<T> {
             sb.append(array[i].toString() + (i == CAPACITY - 1 ? "" : ", "));
         }
         return sb.toString();
+    }
+
+    public static void graficarTabla(String[] datos) throws IOException {
+        String texto = "";
+        String punteros = "";
+        texto += "struct1 [label=\"";
+        for (int i = 0; i < datos.length; i++)
+        {
+            if (i + 1 == datos.length)
+            {
+                texto += "<" + i + "> " + i;
+            } else
+            {
+                texto += "<" + i + "> " + i + "|";
+            }
+            if (!(datos[i].equalsIgnoreCase("[]") || datos[i].equalsIgnoreCase(" []")))
+            {
+                punteros += "struct1:" + i + "->" + "\"" + datos[i] + "\";\n";
+            } 
+        }
+        texto += "\"];\n";
+
+        String salida = "digraph G {\n rankdir=\"LR\";\n"
+                + "node [shape=record];";
+        salida += texto;
+        salida += punteros;
+        salida += "label = \" Tabla de Estudiantes \";\n";
+        salida += "}\n";
+
+        StringBuffer codigo = new StringBuffer(salida);
+        Manejador.generarGrafo(codigo, "tablaEstudiantes");
+
     }
 
     private class List<T> {
