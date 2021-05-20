@@ -333,13 +333,9 @@ public class ArbolAVL<T> {
     public void crearGrafica() {
         grafica = new StringBuffer();
         grafica.append("digraph G{\n"
-                + "subgraph cluster_0{\n"
-                + "style=filled;\n"
-                + "color=lightgrey;\n"
-                + "node[shape=rect,style=filled,color=white];\n");
+                + "node[shape=rect,color=black];\n");
         obtenerGrafica(root);
         grafica.append("label=\"Arbol de Catedraticos\";\n"
-                + "}\n"
                 + "}\n");
         Manejador.generarGrafo(grafica, "arbolCatedraticos");
     }
@@ -370,6 +366,12 @@ public class ArbolAVL<T> {
         }
 
         obtenerGrafica(nodo.getRight());
+    }
+    
+    public String getGraficaHorario(){
+        grafica=new StringBuffer();
+        obtenerGrafica(root);
+        return grafica.toString();
     }
 
     private class Nodo<T> {

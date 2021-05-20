@@ -24,7 +24,6 @@ public class InicioEstudiante extends javax.swing.JFrame {
         this.pack();
         idTxt.setText(String.valueOf(Manejador.getUsuarioActual().getId()));
         nombreTxt.setText(Manejador.getUsuarioActual().getName());
-        tipousuarioTxt.setText(Manejador.getUsuarioActual().getType());
     }
 
     /**
@@ -37,69 +36,103 @@ public class InicioEstudiante extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        idTxt = new javax.swing.JLabel();
-        nombreTxt = new javax.swing.JLabel();
-        tipousuarioTxt = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        idTxt = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        nombreTxt = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem14 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-close-window-48.png"))); // NOI18N
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 30, 30));
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("ID:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         idTxt.setBackground(new java.awt.Color(255, 255, 255));
         idTxt.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         idTxt.setForeground(new java.awt.Color(0, 0, 0));
         idTxt.setText("id");
-        jPanel1.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
-
-        nombreTxt.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        nombreTxt.setForeground(new java.awt.Color(0, 0, 0));
-        nombreTxt.setText("nombre");
-        jPanel1.add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, -1, -1));
-
-        tipousuarioTxt.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        tipousuarioTxt.setForeground(new java.awt.Color(0, 0, 0));
-        tipousuarioTxt.setText("tipousuarioTxt");
-        jPanel1.add(tipousuarioTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, -1, -1));
+        jPanel2.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Nombre:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Tipo de Usuario:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, -1, -1));
+        nombreTxt.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        nombreTxt.setForeground(new java.awt.Color(0, 0, 0));
+        nombreTxt.setText("nombre");
+        jPanel2.add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("ID:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, -1, -1));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-user-male-52.png"))); // NOI18N
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Bienvenido ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, 50));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondoAzul1.jpeg"))); // NOI18N
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 150));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/descarga (1).jpeg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 400));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 290, 150));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 420));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-unisinos-university-96.png"))); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
 
-        jMenu1.setText("Visualizar");
+        jLabel8.setFont(new java.awt.Font("Loma", 1, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 81, 176));
+        jLabel8.setText("Sistema de Universidad");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Loma", 1, 36)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 81, 176));
+        jLabel9.setText("Estudiantes");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(153, 0, 0));
+        jButton1.setFont(new java.awt.Font("Liberation Sans", 0, 15)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Cerrar Sesion");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondoBlanco.jpeg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 420));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 420));
+
+        jMenuBar1.setBackground(new java.awt.Color(51, 51, 51));
+        jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
+
+        jMenu1.setText("Area de Trabajo");
 
         jMenuItem1.setText("Asignaciones");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,23 +152,6 @@ public class InicioEstudiante extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu4.setText("Cuenta");
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
-            }
-        });
-
-        jMenuItem14.setText("Cerrar Sesion");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem14);
-
-        jMenuBar1.add(jMenu4);
-
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -151,16 +167,17 @@ public class InicioEstudiante extends javax.swing.JFrame {
         new VerNotas();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Manejador.logOut();
         this.dispose();
         new Login();
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
-
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-        // TODO add your handling code here:3
-    }//GEN-LAST:event_jMenu4ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,19 +223,22 @@ public class InicioEstudiante extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel idTxt;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel nombreTxt;
-    private javax.swing.JLabel tipousuarioTxt;
     // End of variables declaration//GEN-END:variables
 }

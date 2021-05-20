@@ -1,37 +1,65 @@
 digraph G{
+graph [compound=true];
+style=filled;
 subgraph cluster_0{
 style=filled;
 color=lightgrey;
-node[shape=rect,style=filled,color=white];
-" 1
-Prof2" ;
-" 2
-Prof3"->" 1
-Prof2";
-" 2
-Prof3"->" 3
-Prof2";
-" 3
-Prof2" ;
-" 4
-Prof3"->" 2
-Prof3";
-" 4
-Prof3"->" 6
-Prof3";
-" 5
-Prof2" ;
-" 6
-Prof3"->" 5
-Prof2";
-" 6
-Prof3"->" 7
-Prof2";
-" 7
-Prof2"->" 8
-Prof3";
-" 8
-Prof3" ;
-label="Arbol de Catedraticos";
-}
-}
+compound=true;
+node[shape=rect,height=.1,color=white];
+edge [arrowhead=normal,arrowtail=dot,color=black];
+"0
+200145785
+1
+30
+25"->"1
+200745781
+2
+60
+10" [constraint=false]; 
+"1
+200745781
+2
+60
+10"->"0
+200145785
+1
+30
+25" [constraint=false]; 
+"1
+200745781
+2
+60
+10"->"2
+200478542
+3
+70
+20" [constraint=false]; 
+"2
+200478542
+3
+70
+20"->"1
+200745781
+2
+60
+10" [constraint=false]; 
+"2
+200478542
+3
+70
+20"->"0
+200145785
+1
+30
+25" [constraint=false]; 
+"0
+200145785
+1
+30
+25"->"2
+200478542
+3
+70
+20" [constraint=false]; 
+label="Lista de Asignaciones";
+}}

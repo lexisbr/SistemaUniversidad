@@ -5,7 +5,12 @@
  */
 package Estructuras;
 
+import Nucleo.Manejador;
+import Objetos.Catedratico;
+import Objetos.Curso;
+import Objetos.Edificio;
 import Objetos.Horario;
+import Objetos.Salon;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +21,9 @@ public class ArbolB<T> {
 
     private Nodo<T> root;
     private ArrayList<Horario> horarios;
-    int grado;
+    private int grado;
+    private StringBuffer grafica;
+    private int contadorNodos;
 
     public ArbolB(int grado) {
         this.grado = grado;
@@ -237,6 +244,160 @@ public class ArbolB<T> {
         return horarios;
     }
 
+    public void getGrafica() {
+        grafica = new StringBuffer();
+        grafica.append("digraph G{\n"
+                + "subgraph cluster_1{\n"
+                + "style=filled;\n"
+                + "color=lightgrey;\n"
+                + "compound=true;\n"
+                + "node[shape=record,height=.1,color=white];\n"
+                + "edge [arrowhead=normal,arrowtail=dot,color=black];\n");
+        contadorNodos = 0;
+        generarGrafica(root);
+        grafica.append("label=\"Arbol de Horarios\";\n");
+        grafica.append("}\n");
+        getGraficaCurso();
+        getGraficaCatedratico();
+        getGraficaEdificios();
+        conectarHorarioCurso(root);
+        conectarHorarioCatedratico(root);
+        conectarHorarioSalon(root);
+        grafica.append("}\n");
+        Manejador.generarGrafo(grafica, "arbolHorarios");
+    }
+
+    private void generarGrafica(Nodo<T> nodo) {
+        contadorNodos++;
+        grafica.append("nodo" + nodo.getFirst() + " [label = \" ");
+        ArrayList<Horario> horarios_nodo = nodo.getHorarios();
+        for (int i = 0; i < horarios_nodo.size(); i++)
+        {
+            Horario horario = horarios_nodo.get(i);
+            grafica.append("<f" + i + ">");
+            grafica.append("|");
+            grafica.append(horario.getId());
+            grafica.append("|");
+            if (i + 1 == horarios_nodo.size())
+            {
+                grafica.append("<f" + (i + 1) + ">");
+            }
+        }
+        grafica.append("\"];\n");
+
+        if (!nodo.isLeaf())
+        {
+            for (int j = 0; j <= nodo.getClaves(); j++)
+            {
+                if (nodo.getChild()[j] != null)
+                {
+                    grafica.append("\"nodo" + nodo.getFirst() + "\"" + ":f" + j + "->" + "\"nodo" + nodo.getChild()[j].getFirst() + "\":f" + j + " ; \n");
+                    generarGrafica(nodo.getChild()[j]);
+                }
+            }
+        }
+
+    }
+
+    private void conectarHorarioCurso(Nodo<T> nodo) {
+        ArrayList<Horario> horarios = nodo.getHorarios();
+        for (int i = 0; i < horarios.size(); i++)
+        {
+            Horario horario = horarios.get(i);
+            Curso curso = horario.getCurso();
+            grafica.append("\"nodo" + nodo.getFirst() + "\"" + ":f" + i + "->" + "\"" + curso.getId() + "\n" + curso.getName() + "\n" + curso.getSemester() + "\n" + curso.getSemester() + "\"  [lhead = cluster_1,arrowhead=normal,arrowtail=dot,color=darkorchid2;\n]; \n");
+        }
+
+        if (!nodo.isLeaf())
+        {
+            for (int j = 0; j <= nodo.getClaves(); j++)
+            {
+                if (nodo.getChild()[j] != null)
+                {
+                    conectarHorarioCurso(nodo.getChild()[j]);
+                }
+            }
+        }
+    }
+
+    private void conectarHorarioCatedratico(Nodo<T> nodo) {
+        ArrayList<Horario> horarios = nodo.getHorarios();
+        for (int i = 0; i < horarios.size(); i++)
+        {
+            Horario horario = horarios.get(i);
+            Catedratico catedratico = horario.getCatedratico();
+            grafica.append("\"nodo" + nodo.getFirst() + "\"" + ":f" + i + "->" + "\" " + catedratico.getId() + "\n" + catedratico.getName() + "\"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=blue]; \n");
+        }
+
+        if (!nodo.isLeaf())
+        {
+            for (int j = 0; j <= nodo.getClaves(); j++)
+            {
+                if (nodo.getChild()[j] != null)
+                {
+                    conectarHorarioCatedratico(nodo.getChild()[j]);
+                }
+            }
+        }
+    }
+
+    private void conectarHorarioSalon(Nodo<T> nodo) {
+        ArrayList<Horario> horarios = nodo.getHorarios();
+        for (int i = 0; i < horarios.size(); i++)
+        {
+            Horario horario = horarios.get(i);
+            Salon salon = horario.getSalon();
+            Edificio edificio  = horario.getEdificio();
+            grafica.append("\"nodo" + nodo.getFirst() + "\"" + ":f" + i + "->" + "\"" + salon.getId() + "_" + edificio.getName() + "\n" + salon.getSize() + " Estudiantes\" [arrowhead=normal,arrowtail=dot,color=deeppink]; \n");
+        }
+
+        if (!nodo.isLeaf())
+        {
+            for (int j = 0; j <= nodo.getClaves(); j++)
+            {
+                if (nodo.getChild()[j] != null)
+                {
+                    conectarHorarioSalon(nodo.getChild()[j]);
+                }
+            }
+        }
+    }
+
+    private void getGraficaCurso() {
+        String codigo = Manejador.getGraficaCursosHorario();
+        grafica.append("subgraph cluster_2{\n"
+                + "style=filled;\n"
+                + "color=lightgrey;\n"
+                + "node[shape=rect,height=.1,color=black];\n");
+        grafica.append(codigo);
+        grafica.append("label=\"Lista de Cursos\";\n"
+                + "}\n");
+    }
+
+    private void getGraficaCatedratico() {
+        String codigo = Manejador.getGraficaCatedraticosHorario();
+        grafica.append("subgraph cluster_3{\n"
+                + "style=filled;\n"
+                + "color=lightgrey;\n"
+                + "node[shape=rect,height=.1,color=black];\n");
+        grafica.append(codigo);
+        grafica.append("label=\"Arbol de Catedraticos\";\n"
+                + "}\n");
+    }
+
+    private void getGraficaEdificios() {
+        String codigo = Manejador.getGraficaEdificiosHorario();
+        grafica.append("subgraph cluster_4{\n"
+                + "style=filled;\n"
+                + "color=lightgrey;\n"
+                + "compound=true;\n"
+                + "node[shape=rect,height=.1,color=black];\n"
+                + "");
+        grafica.append(codigo);
+        grafica.append("label=\"Lista de Edificios\";\n"
+                + "}\n");
+    }
+
     private class Nodo<T> {
 
         private int claves;
@@ -273,6 +434,10 @@ public class ArbolB<T> {
                 horarios.add((Horario) keys[i]);
             }
             return horarios;
+        }
+
+        public int getFirst() {
+            return ((Horario) keys[0]).getId();
         }
 
         public Object find(int key) {

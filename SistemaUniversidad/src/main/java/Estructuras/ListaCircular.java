@@ -310,7 +310,7 @@ public class ListaCircular<T> {
 
     public void graficarListaCircular() throws IOException {
         String salida = "digraph G{\n";
-        salida+="graph [compound=true];\n";
+        salida += "graph [compound=true];\n";
         salida += "style=filled;\n";
         int contadorSalones = 0;
         if (root != null)
@@ -335,27 +335,29 @@ public class ListaCircular<T> {
                     Usuario user = (Usuario) aux.getData();
                     Usuario userSiguiente = (Usuario) aux.getNext().getData();
                     Usuario userAnterior = (Usuario) aux.getNext().getPrev().getData();
-                    salida += user.getId() + "->" + userSiguiente.getId() + " [constraint=false]; \n";
-                    salida += userSiguiente.getId() + "->" + userAnterior.getId() + " [constraint=false]; \n";
-                }
-                if (aux.getData() instanceof Curso)
+                    salida += "\"" + user.getId() + "\n" + user.getName() + "\n" + user.getType() + "\n" + user.getPassword() + "\"" + "->"
+                            + "\"" + userSiguiente.getId() + "\n" + userSiguiente.getName() + "\n" + userSiguiente.getType() + "\n" + userSiguiente.getPassword() + "\""
+                            + " [constraint=false]; \n";
+                    salida += "\"" + userSiguiente.getId() + "\n" + userSiguiente.getName() + "\n" + userSiguiente.getType() + "\n" + userSiguiente.getPassword() + "\"" + "->"
+                            + "\"" + userAnterior.getId() + "\n" + userAnterior.getName() + "\n" + userAnterior.getType() + "\n" + userAnterior.getPassword() + "\""
+                            + " [constraint=false]; \n";
+                } else if (aux.getData() instanceof Curso)
                 {
                     Curso curso = (Curso) aux.getData();
                     Curso cursoSiguiente = (Curso) aux.getNext().getData();
                     Curso cursoAnterior = (Curso) aux.getNext().getPrev().getData();
-                    salida += curso.getId() + "->" + cursoSiguiente.getId() + " [constraint=false]; \n";
-                    salida += cursoSiguiente.getId() + "->" + cursoAnterior.getId() + " [constraint=false]; \n";
-                }
-                if (aux.getData() instanceof Edificio)
+                    salida += "\"" + curso.getId() + "\n" + curso.getName() + "\n" + curso.getSemester() + "\n" + curso.getSemester() + "\"" + "->"
+                            + "\"" + cursoSiguiente.getId() + "\n" + cursoSiguiente.getName() + "\n" + cursoSiguiente.getSemester() + "\n" + cursoSiguiente.getSemester() + "\"" + " [constraint=false]; \n";
+                    salida += "\"" + cursoSiguiente.getId() + "\n" + cursoSiguiente.getName() + "\n" + cursoSiguiente.getSemester() + "\n" + cursoSiguiente.getSemester() + "\"" + "->"
+                            + "\"" + cursoAnterior.getId() + "\n" + cursoAnterior.getName() + "\n" + cursoAnterior.getSemester() + "\n" + cursoAnterior.getSemester() + "\"" + " [constraint=false]; \n";
+                } else if (aux.getData() instanceof Edificio)
                 {
                     Edificio edificio = (Edificio) aux.getData();
                     Edificio edificioSiguiente = (Edificio) aux.getNext().getData();
                     Edificio edificioAnterior = (Edificio) aux.getNext().getPrev().getData();
                     salida += edificio.getName() + "->" + edificioSiguiente.getName() + " [constraint=false]; \n";
                     salida += edificioSiguiente.getName() + "->" + edificioAnterior.getName() + " [constraint=false]; \n";
-                    //Salones
                     ListaSimple<Salon> salones = edificio.getListaSalones();
-                    System.out.println("Contador "+contadorSalones);
                     salida += "subgraph cluster_" + contadorSalones + "{node [shape = rect,height=.1]; rankdir=LR; label=\"Salones_" + contadorSalones + "\";  \n";
                     salida += salones.graficarSalones(edificio.getName());
                     salida += " } \n";
@@ -364,12 +366,10 @@ public class ListaCircular<T> {
                         if (salones.getRootData() instanceof Salon)
                         {
                             Salon salon = (Salon) salones.getRootData();
-                            salida += edificio.getName()+ "->\"" + salon.getId()+"_"+edificio.getName()+ "\"[lhead = cluster_" + contadorSalones + "]; \n";
+                            salida += edificio.getName() + "->\"" + salon.getId() + "_" + edificio.getName() + "\n" + salon.getSize() + " Estudiantes\" [lhead = cluster_" + contadorSalones + "]; \n";
                         }
                     }
                     contadorSalones++;
-                    
-
                 }
                 aux = aux.getNext();
             } while (aux != root);
@@ -388,6 +388,104 @@ public class ListaCircular<T> {
             }
         }
 
+    }
+
+    public String getGraficaCursos() {
+        String salida = "";
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+            do
+            {
+                Curso curso = (Curso) aux.getData();
+                Curso cursoSiguiente = (Curso) aux.getNext().getData();
+                Curso cursoAnterior = (Curso) aux.getNext().getPrev().getData();
+                salida += "\"" + curso.getId() + "\n" + curso.getName() + "\n" + curso.getSemester() + "\n" + curso.getSemester() + "\"" + "->"
+                        + "\"" + cursoSiguiente.getId() + "\n" + cursoSiguiente.getName() + "\n" + cursoSiguiente.getSemester() + "\n" + cursoSiguiente.getSemester() + "\"" + " [constraint=false]; \n";
+                salida += "\"" + cursoSiguiente.getId() + "\n" + cursoSiguiente.getName() + "\n" + cursoSiguiente.getSemester() + "\n" + cursoSiguiente.getSemester() + "\"" + "->"
+                        + "\"" + cursoAnterior.getId() + "\n" + cursoAnterior.getName() + "\n" + cursoAnterior.getSemester() + "\n" + cursoAnterior.getSemester() + "\"" + " [constraint=false]; \n";
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return salida;
+    }
+
+    public String getGraficaEdificios() throws IOException {
+        String salida = "";
+        int contadorSalones = 5;
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+            do
+            {
+                Edificio edificio = (Edificio) aux.getData();
+                Edificio edificioSiguiente = (Edificio) aux.getNext().getData();
+                Edificio edificioAnterior = (Edificio) aux.getNext().getPrev().getData();
+                salida += edificio.getName() + "->" + edificioSiguiente.getName() + " [constraint=false]; \n";
+                salida += edificioSiguiente.getName() + "->" + edificioAnterior.getName() + " [constraint=false]; \n";
+                ListaSimple<Salon> salones = edificio.getListaSalones();
+                salida += "subgraph cluster_" + contadorSalones + "{node [shape = rect,height=.1]; rankdir=LR; label=\"Salones_" + contadorSalones + "\";  \n";
+                salida += salones.graficarSalones(edificio.getName());
+                salida += " } \n";
+                if (salones.getRoot() != null)
+                {
+                    if (salones.getRootData() instanceof Salon)
+                    {
+                        Salon salon = (Salon) salones.getRootData();
+                        salida += edificio.getName() + "->\"" + salon.getId() + "_" + edificio.getName() + "\n" + salon.getSize() + " Estudiantes\" [lhead = cluster_" + contadorSalones + "]; \n";
+                    }
+                }
+                contadorSalones++;
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return salida;
+    }
+
+    public void graficarListaAsignaciones() {
+        String salida = "digraph G{\n";
+        salida += "graph [compound=true];\n";
+        salida += "style=filled;\n";
+        salida += "subgraph cluster_0{\n"
+                + "style=filled;\n"
+                + "color=lightgrey;\n"
+                + "compound=true;\n"
+                + "node[shape=rect,height=.1,color=white];\n"
+                + "edge [arrowhead=normal,arrowtail=dot,color=black];\n";
+        salida += getGraficaAsignaciones();
+        salida += "label=\"Lista de Asignaciones\";\n";
+        salida += "}";
+        salida += "}";
+        StringBuffer codigo = new StringBuffer(salida);
+        Manejador.generarGrafo(codigo,"listaAsignaciones");
+    }
+
+    private String getGraficaAsignaciones() {
+        String salida = "";
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+            do
+            {
+                Asignacion asignacion = (Asignacion) aux.getData();
+                Asignacion asignacionSiguiente = (Asignacion) aux.getNext().getData();
+                Asignacion asignacionAnterior = (Asignacion) aux.getNext().getPrev().getData();
+                salida += "\"" + asignacion.getId() + "\n" + asignacion.getEstudiante().getId() + "\n" + asignacion.getHorario().getId() + "\n" + asignacion.getZona() + "\n" + asignacion.getFinal_test() + "\"" + "->"
+                        + "\"" + asignacionSiguiente.getId() + "\n" + asignacionSiguiente.getEstudiante().getId() + "\n" + asignacionSiguiente.getHorario().getId() + "\n" + asignacionSiguiente.getZona() + "\n" + asignacionSiguiente.getFinal_test() + "\"" + " [constraint=false]; \n";
+                salida += "\"" + asignacionSiguiente.getId() + "\n" + asignacionSiguiente.getEstudiante().getId() + "\n" + asignacionSiguiente.getHorario().getId() + "\n" + asignacionSiguiente.getZona() + "\n" + asignacionSiguiente.getFinal_test() + "\"" + "->"
+                        + "\"" + asignacionAnterior.getId() + "\n" + asignacionAnterior.getEstudiante().getId() + "\n" + asignacionAnterior.getHorario().getId() + "\n" + asignacionAnterior.getZona() + "\n" + asignacionAnterior.getFinal_test() + "\"" + " [constraint=false]; \n";
+                salida += 
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return salida;
+    }
+    
+    private String conectarAsignacionesHorario(Asignacion asignacion){
+        Horario horario = asignacion.getHorario();
+        String salida = "\"" + asignacion.getId() + "\n" + asignacion.getEstudiante().getId() + "\n" + asignacion.getHorario().getId() + "\n" + asignacion.getZona() + "\n" + asignacion.getFinal_test() + "\"" +"->"
+                            ;
+        return null;
     }
 
     private class Nodo<T> {

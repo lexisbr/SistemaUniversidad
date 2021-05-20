@@ -41,7 +41,7 @@ public class Manejador {
 
     public static void inicializarSistema() {
         listaUsuarios.add(new Usuario(12345, "Alejandro", "1", Usuario.SUPER));
-        listaUsuarios.add(new Usuario(1, "Alejandro", "1", Usuario.COLABORADOR));
+        /*listaUsuarios.add(new Usuario(1, "Alejandro", "1", Usuario.COLABORADOR));
         listaUsuarios.add(new Usuario(2, "Alejandro", "1", Usuario.ESTUDIANTE));
         listaUsuarios.add(new Usuario(3, "Alejandro", "1", Usuario.ESTUDIANTE));
         listaUsuarios.add(new Usuario(4, "Alejandro", "1", Usuario.ESTUDIANTE));
@@ -56,13 +56,13 @@ public class Manejador {
         addEstudiante(123, "lexis", "zona1");
         addEstudiante(1234, "lexis", "zona1");
         addEstudiante(1235, "lexis", "zona1");
-        /*arbolCatedraticos.add(new Catedratico(1444, "alfredo ", "chileverde"));
+        arbolCatedraticos.add(new Catedratico(1444, "alfredo ", "chileverde"));
         arbolCatedraticos.add(new Catedratico(2222222, "alfredo ", "chileverde"));
         arbolCatedraticos.add(new Catedratico(3233333, "alfredo ", "chileverde"));
         arbolCatedraticos.add(new Catedratico(4444444, "alfredo ", "chileverde"));
         arbolCatedraticos.add(new Catedratico(5555555, "alfredo ", "chileverde"));
-        arbolCatedraticos.add(new Catedratico(6666666, "alfredo ", "chileverde"));*/
- /*listaUsuarios.add(new Usuario(123, "Alejandro", "1", Usuario.COLABORADOR));
+        arbolCatedraticos.add(new Catedratico(6666666, "alfredo ", "chileverde"));
+        listaUsuarios.add(new Usuario(123, "Alejandro", "1", Usuario.COLABORADOR));
         addEstudiante(123, "lexis", "zona1");
         addEstudiante(1234, "lexis", "zona1");
         addEstudiante(1235, "lexis", "zona1");
@@ -177,6 +177,17 @@ public class Manejador {
             e.printStackTrace();
         }
     }
+    
+    public static String getGraficaEdificiosHorario(){
+        try
+        {
+            return listaEdificios.getGraficaEdificios();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
     /**
      * METODOS PARA LISTA DE SALONES
@@ -230,6 +241,10 @@ public class Manejador {
 
     public static ListaCircular<Curso> getListaCursos() {
         return listaCursos;
+    }
+    
+    public static String getGraficaCursosHorario(){
+        return listaCursos.getGraficaCursos();
     }
     
     public static void getGraficaCursos() {
@@ -313,6 +328,10 @@ public class Manejador {
     public static void getGraficaCatedraticos() {
         arbolCatedraticos.crearGrafica();
     }
+    
+    public static String getGraficaCatedraticosHorario(){
+        return arbolCatedraticos.getGraficaHorario();
+    }
 
     /**
      * *
@@ -347,6 +366,10 @@ public class Manejador {
     public static ArbolB<Horario> getArbolHorario() {
         return arbolHorarios;
     }
+    
+    public static void getGraficaHorarios(){
+        arbolHorarios.getGrafica();
+    }
 
     /**
      * METODOS PARA LISTA DE ASIGNACIONES
@@ -369,6 +392,10 @@ public class Manejador {
 
     public static ArrayList<Asignacion> getAsignaciones(int carnet) {
         return listaAsignaciones.getAsignacionesEstudiante(carnet);
+    }
+    
+    public static void getGraficaAsignaciones(){
+        listaAsignaciones.graficarListaAsignaciones();
     }
 
     /**

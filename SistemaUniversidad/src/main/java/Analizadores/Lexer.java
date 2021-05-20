@@ -539,7 +539,7 @@ public class Lexer implements java_cup.runtime.Scanner {
   /* user code: */
     private Symbol symbol(int type){
         String lexeme = yytext();
-        System.out.printf("Token >> Tipo: %d | Lexeme: %s | Linea: %d | Columna: %d\n", type, lexeme == null ? "" : lexeme, yyline + 1, yycolumn + 1);
+       // System.out.printf("Token >> Tipo: %d | Lexeme: %s | Linea: %d | Columna: %d\n", type, lexeme == null ? "" : lexeme, yyline + 1, yycolumn + 1);
         return new Symbol(type, new Token(lexeme, yyline+1,yycolumn+1));
     }
 

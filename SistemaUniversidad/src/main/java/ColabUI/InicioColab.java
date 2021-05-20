@@ -14,6 +14,9 @@ import AdminUI.ABCedificio.EliminarEdificio;
 import AdminUI.ABCsalon.AgregarSalon;
 import AdminUI.ABCsalon.EditarSalon;
 import AdminUI.ABCsalon.EliminarSalon;
+import AdminUI.ABCusuario.AgregarUsuario;
+import AdminUI.ABCusuario.EditarUsuario;
+import AdminUI.ABCusuario.EliminarUsuario;
 import ColabUI.ABCcatedratico.AgregarCatedratico;
 import ColabUI.ABCcatedratico.EditarCatedratico;
 import ColabUI.ABCcatedratico.EliminarCatedratico;
@@ -41,7 +44,6 @@ public class InicioColab extends javax.swing.JFrame {
         this.pack();
         idTxt.setText(String.valueOf(Manejador.getUsuarioActual().getId()));
         nombreTxt.setText(Manejador.getUsuarioActual().getName());
-        tipousuarioTxt.setText(Manejador.getUsuarioActual().getType());
     }
 
     /**
@@ -53,15 +55,27 @@ public class InicioColab extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
+        jPanel1 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         idTxt = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         nombreTxt = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        tipousuarioTxt = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem26 = new javax.swing.JMenuItem();
+        jMenuItem27 = new javax.swing.JMenuItem();
+        jMenuItem28 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -92,50 +106,115 @@ public class InicioColab extends javax.swing.JFrame {
         jMenuItem22 = new javax.swing.JMenuItem();
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem24 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem25 = new javax.swing.JMenuItem();
+
+        jScrollPane1.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Bienvenido ");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, 50));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("ID:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, -1, -1));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-close-window-48.png"))); // NOI18N
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 30, 30));
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("ID:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         idTxt.setBackground(new java.awt.Color(255, 255, 255));
         idTxt.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         idTxt.setForeground(new java.awt.Color(0, 0, 0));
         idTxt.setText("id");
-        getContentPane().add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
+        jPanel2.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Nombre:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
         nombreTxt.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         nombreTxt.setForeground(new java.awt.Color(0, 0, 0));
         nombreTxt.setText("nombre");
-        getContentPane().add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, -1, -1));
+        jPanel2.add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Tipo de Usuario:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, -1, -1));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-user-male-52.png"))); // NOI18N
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
-        tipousuarioTxt.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        tipousuarioTxt.setForeground(new java.awt.Color(0, 0, 0));
-        tipousuarioTxt.setText("tipousuarioTxt");
-        getContentPane().add(tipousuarioTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, -1, -1));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondoAzul1.jpeg"))); // NOI18N
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 180));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/whiteBackground.jpeg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 400));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 290, 150));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-unisinos-university-96.png"))); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Loma", 1, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 81, 176));
+        jLabel8.setText("Colaboradores");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Loma", 1, 36)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 81, 176));
+        jLabel9.setText("Sistema de Universidad");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(153, 0, 0));
+        jButton1.setFont(new java.awt.Font("Liberation Sans", 0, 15)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Cerrar Sesion");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondoBlanco.jpeg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 420));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 420));
+
+        jMenuBar1.setBackground(new java.awt.Color(51, 51, 51));
+        jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
+
+        jMenu8.setText("Usuarios");
+
+        jMenuItem26.setText("Agregar");
+        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem26ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem26);
+
+        jMenuItem27.setText("Eliminar");
+        jMenuItem27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem27ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem27);
+
+        jMenuItem28.setText("Modificar");
+        jMenuItem28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem28ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem28);
+
+        jMenuBar1.add(jMenu8);
 
         jMenu1.setText("Estudiantes");
 
@@ -352,24 +431,15 @@ public class InicioColab extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem24);
 
+        jMenuItem25.setText("Horarios");
+        jMenuItem25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem25ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem25);
+
         jMenuBar1.add(jMenu7);
-
-        jMenu4.setText("Cuenta");
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
-            }
-        });
-
-        jMenuItem14.setText("Cerrar Sesion");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem14);
-
-        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -390,17 +460,6 @@ public class InicioColab extends javax.swing.JFrame {
         // TODO add your handling code here:
         new EditarEstudiante();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        // TODO add your handling code here:
-        Manejador.logOut();
-        this.dispose();
-        new Login();
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
-
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-        // TODO add your handling code here:3
-    }//GEN-LAST:event_jMenu4ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
@@ -506,6 +565,38 @@ public class InicioColab extends javax.swing.JFrame {
         Manejador.getGraficaEstudiantes();
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
+    private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
+        // TODO add your handling code here:
+        Manejador.getGraficaHorarios();
+    }//GEN-LAST:event_jMenuItem25ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Manejador.logOut();
+        this.dispose();
+        new Login();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
+        // TODO add your handling code here:
+        new AgregarUsuario();
+    }//GEN-LAST:event_jMenuItem26ActionPerformed
+
+    private void jMenuItem27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed
+        // TODO add your handling code here:
+        new EliminarUsuario();
+    }//GEN-LAST:event_jMenuItem27ActionPerformed
+
+    private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
+        // TODO add your handling code here:
+        new EditarUsuario();
+    }//GEN-LAST:event_jMenuItem28ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -550,25 +641,30 @@ public class InicioColab extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel idTxt;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
@@ -580,6 +676,10 @@ public class InicioColab extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
+    private javax.swing.JMenuItem jMenuItem25;
+    private javax.swing.JMenuItem jMenuItem26;
+    private javax.swing.JMenuItem jMenuItem27;
+    private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -587,8 +687,10 @@ public class InicioColab extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nombreTxt;
     private javax.swing.JMenu salonMenu;
-    private javax.swing.JLabel tipousuarioTxt;
     // End of variables declaration//GEN-END:variables
 }

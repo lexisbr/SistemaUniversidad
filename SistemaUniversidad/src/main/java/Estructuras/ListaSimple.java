@@ -274,11 +274,11 @@ public class ListaSimple<T> {
                     {
                         Salon salon = (Salon) aux.getData();
                         Salon salonSiguiente = (Salon) aux.getNext().getData();
-                        salida += "\""+salon.getId() + "_" + edificio + "\"->\"" + salonSiguiente.getId() + "_" + edificio + "\" ; \n";
+                        salida += "\""+salon.getId() + "_" + edificio+"\n"+salon.getSize()+" Estudiantes"+ "\"->\"" + salonSiguiente.getId() + "_" + edificio + "\n"+salonSiguiente.getSize()+" Estudiantes\" ; \n";
                     } catch (Exception e)
                     {
                         Salon salon = (Salon) aux.getData();
-                        salida += "\""+salon.getId() + "_" + edificio + "\"; \n";
+                        salida += "\""+salon.getId() + "_" + edificio+"\n"+salon.getSize()+" Estudiantes\"; \n";
                     }
 
                 }
