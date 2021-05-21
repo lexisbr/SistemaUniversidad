@@ -1,5 +1,4 @@
 digraph G{
-graph [compound=true];
 style=filled;
 subgraph cluster_0{
 style=filled;
@@ -10,7 +9,7 @@ edge [arrowhead=normal,arrowtail=dot,color=black];
 "0
 200145785
 1
-30
+60
 25"->"1
 200745781
 2
@@ -23,7 +22,7 @@ edge [arrowhead=normal,arrowtail=dot,color=black];
 10"->"0
 200145785
 1
-30
+60
 25" [constraint=false]; 
 "1
 200745781
@@ -50,16 +49,271 @@ edge [arrowhead=normal,arrowtail=dot,color=black];
 20"->"0
 200145785
 1
-30
+60
 25" [constraint=false]; 
 "0
 200145785
 1
-30
+60
 25"->"2
 200478542
 3
 70
 20" [constraint=false]; 
 label="Lista de Asignaciones";
-}}
+}subgraph cluster_1{
+style=filled;
+color=lightgrey;
+compound=true;
+node[shape=record,height=.1,color=white];
+edge [arrowhead=normal,arrowtail=dot,color=black];
+nodo3 [label = " <f0>|3|<f1>|6|<f2>"];
+"nodo3":f0->"nodo1":f0 ; 
+nodo1 [label = " <f0>|1|<f1>|2|<f2>"];
+"nodo3":f1->"nodo4":f1 ; 
+nodo4 [label = " <f0>|4|<f1>|5|<f2>"];
+"nodo3":f2->"nodo7":f2 ; 
+nodo7 [label = " <f0>|7|<f1>|8|<f2>|9|<f3>|10|<f4>"];
+label="Arbol de Horarios";
+}
+subgraph cluster_2{
+style=filled;
+color=lightgrey;
+node[shape=rect,height=.1,color=black];
+"1
+progra
+100
+100"->"777
+compiladores1
+5
+5" [constraint=false]; 
+"777
+compiladores1
+5
+5"->"1
+progra
+100
+100" [constraint=false]; 
+"777
+compiladores1
+5
+5"->"771
+programacion2
+4
+4" [constraint=false]; 
+"771
+programacion2
+4
+4"->"777
+compiladores1
+5
+5" [constraint=false]; 
+"771
+programacion2
+4
+4"->"1
+progra
+100
+100" [constraint=false]; 
+"1
+progra
+100
+100"->"771
+programacion2
+4
+4" [constraint=false]; 
+label="Lista de Cursos";
+}
+subgraph cluster_3{
+style=filled;
+color=lightgrey;
+node[shape=rect,height=.1,color=black];
+" 1
+lex" ;
+" 2
+Prof3"->" 1
+lex";
+" 2
+Prof3"->" 3
+Prof2";
+" 3
+Prof2" ;
+" 4
+Prof3"->" 2
+Prof3";
+" 4
+Prof3"->" 6
+Prof3";
+" 5
+Prof2" ;
+" 6
+Prof3"->" 5
+Prof2";
+" 6
+Prof3"->" 7
+Prof2";
+" 7
+Prof2"->" 8
+Prof3";
+" 8
+Prof3" ;
+label="Arbol de Catedraticos";
+}
+subgraph cluster_4{
+style=filled;
+color=lightgrey;
+compound=true;
+node[shape=rect,height=.1,color=black];
+aaa->T1 [constraint=false]; 
+T1->aaa [constraint=false]; 
+subgraph cluster_5{node [shape = rect,height=.1]; rankdir=LR; label="Salones_5";  
+"1_aaa
+100 Estudiantes"; 
+ } 
+aaa->"1_aaa
+100 Estudiantes" [lhead = cluster_5]; 
+T1->T5 [constraint=false]; 
+T5->T1 [constraint=false]; 
+subgraph cluster_6{node [shape = rect,height=.1]; rankdir=LR; label="Salones_6";  
+ } 
+T5->T3 [constraint=false]; 
+T3->T5 [constraint=false]; 
+subgraph cluster_7{node [shape = rect,height=.1]; rankdir=LR; label="Salones_7";  
+"305_T5
+25 Estudiantes"; 
+ } 
+T5->"305_T5
+25 Estudiantes" [lhead = cluster_7]; 
+T3->aaa [constraint=false]; 
+aaa->T3 [constraint=false]; 
+subgraph cluster_8{node [shape = rect,height=.1]; rankdir=LR; label="Salones_8";  
+"310_T3
+125 Estudiantes"->"110_T3
+75 Estudiantes" ; 
+"110_T3
+75 Estudiantes"; 
+ } 
+T3->"310_T3
+125 Estudiantes" [lhead = cluster_8]; 
+label="Lista de Edificios";
+}
+"nodo3":f0->"771
+programacion2
+4
+4"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=darkorchid2]; 
+"nodo3":f1->"771
+programacion2
+4
+4"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=darkorchid2]; 
+"nodo1":f0->"777
+compiladores1
+5
+5"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=darkorchid2]; 
+"nodo1":f1->"777
+compiladores1
+5
+5"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=darkorchid2]; 
+"nodo4":f0->"777
+compiladores1
+5
+5"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=darkorchid2]; 
+"nodo4":f1->"771
+programacion2
+4
+4"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=darkorchid2]; 
+"nodo7":f0->"771
+programacion2
+4
+4"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=darkorchid2]; 
+"nodo7":f1->"777
+compiladores1
+5
+5"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=darkorchid2]; 
+"nodo7":f2->"777
+compiladores1
+5
+5"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=darkorchid2]; 
+"nodo7":f3->"771
+programacion2
+4
+4"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=darkorchid2]; 
+"nodo3":f0->" 1
+lex"  [lhead = cluster_3,arrowhead=normal,arrowtail=dot,color=blue]; 
+"nodo3":f1->" 4
+Prof3"  [lhead = cluster_3,arrowhead=normal,arrowtail=dot,color=blue]; 
+"nodo1":f0->" 1
+lex"  [lhead = cluster_3,arrowhead=normal,arrowtail=dot,color=blue]; 
+"nodo1":f1->" 1
+lex"  [lhead = cluster_3,arrowhead=normal,arrowtail=dot,color=blue]; 
+"nodo4":f0->" 3
+Prof2"  [lhead = cluster_3,arrowhead=normal,arrowtail=dot,color=blue]; 
+"nodo4":f1->" 3
+Prof2"  [lhead = cluster_3,arrowhead=normal,arrowtail=dot,color=blue]; 
+"nodo7":f0->" 4
+Prof3"  [lhead = cluster_3,arrowhead=normal,arrowtail=dot,color=blue]; 
+"nodo7":f1->" 5
+Prof2"  [lhead = cluster_3,arrowhead=normal,arrowtail=dot,color=blue]; 
+"nodo7":f2->" 5
+Prof2"  [lhead = cluster_3,arrowhead=normal,arrowtail=dot,color=blue]; 
+"nodo7":f3->" 7
+Prof2"  [lhead = cluster_3,arrowhead=normal,arrowtail=dot,color=blue]; 
+"nodo3":f0->"310_T3
+125 Estudiantes" [arrowhead=normal,arrowtail=dot,color=deeppink]; 
+"nodo3":f1->"310_T3
+125 Estudiantes" [arrowhead=normal,arrowtail=dot,color=deeppink]; 
+"nodo1":f0->"110_T3
+75 Estudiantes" [arrowhead=normal,arrowtail=dot,color=deeppink]; 
+"nodo1":f1->"110_T3
+75 Estudiantes" [arrowhead=normal,arrowtail=dot,color=deeppink]; 
+"nodo4":f0->"110_T3
+75 Estudiantes" [arrowhead=normal,arrowtail=dot,color=deeppink]; 
+"nodo4":f1->"110_T3
+75 Estudiantes" [arrowhead=normal,arrowtail=dot,color=deeppink]; 
+"nodo7":f0->"310_T3
+125 Estudiantes" [arrowhead=normal,arrowtail=dot,color=deeppink]; 
+"nodo7":f1->"110_T3
+75 Estudiantes" [arrowhead=normal,arrowtail=dot,color=deeppink]; 
+"nodo7":f2->"110_T3
+75 Estudiantes" [arrowhead=normal,arrowtail=dot,color=deeppink]; 
+"nodo7":f3->"310_T3
+125 Estudiantes" [arrowhead=normal,arrowtail=dot,color=deeppink]; 
+"0
+200145785
+1
+60
+25"->"nodo1":f0[lhead = cluster_1,arrowhead=normal,arrowtail=dot,color=chartreuse4]; 
+"1
+200745781
+2
+60
+10"->"nodo1":f1[lhead = cluster_1,arrowhead=normal,arrowtail=dot,color=chartreuse4]; 
+"2
+200478542
+3
+70
+20"->"nodo3":f0[lhead = cluster_1,arrowhead=normal,arrowtail=dot,color=chartreuse4]; 
+subgraph cluster_Estudiantes {
+ rankdir="LR";
+node [shape=record];struct1 [label="<0> 0|<1> 1|<2> 2|<3> 3|<4> 4|<5> 5|<6> 6|<7> 7|<8> 8|<9> 9|<10> 10|<11> 11|<12> 12|<13> 13|<14> 14|<15> 15|<16> 16|<17> 17|<18> 18|<19> 19|<20> 20|<21> 21|<22> 22|<23> 23|<24> 24|<25> 25|<26> 26|<27> 27|<28> 28|<29> 29|<30> 30|<31> 31|<32> 32|<33> 33|<34> 34|<35> 35|<36> 36"];
+struct1:0->"[200145785]";
+struct1:20->" [2018]";
+struct1:24->" [200745781]";
+struct1:36->" [200478542]";
+label = " Tabla de Estudiantes ";
+}
+"0
+200145785
+1
+60
+25"->" [200145785]"[constraint=false,lhead = cluster_Estudiante,arrowhead=normal,arrowtail=dot,color=cadetblue4]; 
+"1
+200745781
+2
+60
+10"->" [200745781]"[constraint=false,lhead = cluster_Estudiante,arrowhead=normal,arrowtail=dot,color=cadetblue4]; 
+"2
+200478542
+3
+70
+20"->" [200478542]"[constraint=false,lhead = cluster_Estudiante,arrowhead=normal,arrowtail=dot,color=cadetblue4]; 
+}

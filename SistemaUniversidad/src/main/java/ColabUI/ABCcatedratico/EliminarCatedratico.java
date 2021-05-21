@@ -213,7 +213,7 @@ public class EliminarCatedratico extends javax.swing.JFrame {
                 eliminarButton.setEnabled(true);
             } else
             {
-                JOptionPane.showMessageDialog(this, "El estudiante no existe", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El catedratico no existe", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (NumberFormatException e)

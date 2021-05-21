@@ -6,6 +6,7 @@
 package Estructuras;
 
 import Nucleo.Manejador;
+import Objetos.Asignacion;
 import Objetos.Catedratico;
 import Objetos.Curso;
 import Objetos.Edificio;
@@ -244,6 +245,37 @@ public class ArbolB<T> {
         return horarios;
     }
 
+    public String getGraficaForAsignaciones() {
+        grafica = new StringBuffer();
+        grafica.append("subgraph cluster_1{\n"
+                + "style=filled;\n"
+                + "color=lightgrey;\n"
+                + "compound=true;\n"
+                + "node[shape=record,height=.1,color=white];\n"
+                + "edge [arrowhead=normal,arrowtail=dot,color=black];\n");
+        contadorNodos = 0;
+        generarGrafica(root);
+        grafica.append("label=\"Arbol de Horarios\";\n");
+        grafica.append("}\n");
+        getGraficaCurso();
+        getGraficaCatedratico();
+        getGraficaEdificios();
+        conectarHorarioCurso(root);
+        conectarHorarioCatedratico(root);
+        conectarHorarioSalon(root);
+        return grafica.toString();
+    }
+    
+    public String getConexionHorarioAsignaciones(ArrayList<Asignacion> asignaciones){
+        String salida = "";
+        for(Asignacion asignacion: asignaciones){
+            salida += "\"" + asignacion.getId() + "\n" + asignacion.getEstudiante().getId() + "\n" + asignacion.getHorario().getId() + "\n" + asignacion.getZona() + "\n" + asignacion.getFinal_test() + "\"" + "->";
+            Nodo<T> nodo = searchNode(asignacion.getHorario().getId());
+            salida +="\"nodo" + nodo.getFirst() + "\"" + ":f" + nodo.findPosition(asignacion.getHorario().getId())+"[lhead = cluster_1,arrowhead=normal,arrowtail=dot,color=chartreuse4]; \n";
+        }
+        return salida;
+    }
+
     public void getGrafica() {
         grafica = new StringBuffer();
         grafica.append("digraph G{\n"
@@ -305,7 +337,7 @@ public class ArbolB<T> {
         {
             Horario horario = horarios.get(i);
             Curso curso = horario.getCurso();
-            grafica.append("\"nodo" + nodo.getFirst() + "\"" + ":f" + i + "->" + "\"" + curso.getId() + "\n" + curso.getName() + "\n" + curso.getSemester() + "\n" + curso.getSemester() + "\"  [lhead = cluster_1,arrowhead=normal,arrowtail=dot,color=darkorchid2;\n]; \n");
+            grafica.append("\"nodo" + nodo.getFirst() + "\"" + ":f" + i + "->" + "\"" + curso.getId() + "\n" + curso.getName() + "\n" + curso.getSemester() + "\n" + curso.getSemester() + "\"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=darkorchid2]; \n");
         }
 
         if (!nodo.isLeaf())
@@ -326,7 +358,7 @@ public class ArbolB<T> {
         {
             Horario horario = horarios.get(i);
             Catedratico catedratico = horario.getCatedratico();
-            grafica.append("\"nodo" + nodo.getFirst() + "\"" + ":f" + i + "->" + "\" " + catedratico.getId() + "\n" + catedratico.getName() + "\"  [lhead = cluster_2,arrowhead=normal,arrowtail=dot,color=blue]; \n");
+            grafica.append("\"nodo" + nodo.getFirst() + "\"" + ":f" + i + "->" + "\" " + catedratico.getId() + "\n" + catedratico.getName() + "\"  [lhead = cluster_3,arrowhead=normal,arrowtail=dot,color=blue]; \n");
         }
 
         if (!nodo.isLeaf())
@@ -347,7 +379,7 @@ public class ArbolB<T> {
         {
             Horario horario = horarios.get(i);
             Salon salon = horario.getSalon();
-            Edificio edificio  = horario.getEdificio();
+            Edificio edificio = horario.getEdificio();
             grafica.append("\"nodo" + nodo.getFirst() + "\"" + ":f" + i + "->" + "\"" + salon.getId() + "_" + edificio.getName() + "\n" + salon.getSize() + " Estudiantes\" [arrowhead=normal,arrowtail=dot,color=deeppink]; \n");
         }
 
@@ -449,6 +481,17 @@ public class ArbolB<T> {
                 }
             }
             return null;
+        }
+        
+        public int findPosition(int key){
+            for (int i = 0; i < claves; i++)
+            {
+                if (castKey(keys[i]) == key)
+                {
+                    return i;
+                }
+            }
+            return 0;
         }
 
         public int castKey(Object key) {

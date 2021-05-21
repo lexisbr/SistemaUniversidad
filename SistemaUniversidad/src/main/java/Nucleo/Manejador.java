@@ -41,39 +41,6 @@ public class Manejador {
 
     public static void inicializarSistema() {
         listaUsuarios.add(new Usuario(12345, "Alejandro", "1", Usuario.SUPER));
-        /*listaUsuarios.add(new Usuario(1, "Alejandro", "1", Usuario.COLABORADOR));
-        listaUsuarios.add(new Usuario(2, "Alejandro", "1", Usuario.ESTUDIANTE));
-        listaUsuarios.add(new Usuario(3, "Alejandro", "1", Usuario.ESTUDIANTE));
-        listaUsuarios.add(new Usuario(4, "Alejandro", "1", Usuario.ESTUDIANTE));
-        listaEdificios.add((new Edificio("edificio1")));
-        addSalonEdificio("edificio1", 1, 2);
-        addSalonEdificio("edificio1", 110, 2);
-        listaEdificios.add((new Edificio("edificio2")));
-        addSalonEdificio("edificio2", 1, 2);
-        listaEdificios.add((new Edificio("edificio3")));
-        addSalonEdificio("edificio3", 1, 2);
-        addSalonEdificio("edificio3", 2, 2);
-        addEstudiante(123, "lexis", "zona1");
-        addEstudiante(1234, "lexis", "zona1");
-        addEstudiante(1235, "lexis", "zona1");
-        arbolCatedraticos.add(new Catedratico(1444, "alfredo ", "chileverde"));
-        arbolCatedraticos.add(new Catedratico(2222222, "alfredo ", "chileverde"));
-        arbolCatedraticos.add(new Catedratico(3233333, "alfredo ", "chileverde"));
-        arbolCatedraticos.add(new Catedratico(4444444, "alfredo ", "chileverde"));
-        arbolCatedraticos.add(new Catedratico(5555555, "alfredo ", "chileverde"));
-        arbolCatedraticos.add(new Catedratico(6666666, "alfredo ", "chileverde"));
-        listaUsuarios.add(new Usuario(123, "Alejandro", "1", Usuario.COLABORADOR));
-        addEstudiante(123, "lexis", "zona1");
-        addEstudiante(1234, "lexis", "zona1");
-        addEstudiante(1235, "lexis", "zona1");
-        
-        listaCursos.add(new Curso(1,"ciencias",2,20));
-        Horario horario = getDataHorario(0, "9:00", "lunes","1", "1", "edificio1", 1);
-        if(horario != null){
-            addHorario(horario);
-        }else{
-            System.out.println("Algo salio mal con el horario");
-        }*/
     }
 
     public static boolean loginUser(String user, String password) {
@@ -167,7 +134,7 @@ public class Manejador {
     public static ListaCircular<Edificio> getListaEdificios() {
         return listaEdificios;
     }
-    
+
     public static void getGraficaEdificios() {
         try
         {
@@ -177,8 +144,8 @@ public class Manejador {
             e.printStackTrace();
         }
     }
-    
-    public static String getGraficaEdificiosHorario(){
+
+    public static String getGraficaEdificiosHorario() {
         try
         {
             return listaEdificios.getGraficaEdificios();
@@ -242,11 +209,11 @@ public class Manejador {
     public static ListaCircular<Curso> getListaCursos() {
         return listaCursos;
     }
-    
-    public static String getGraficaCursosHorario(){
+
+    public static String getGraficaCursosHorario() {
         return listaCursos.getGraficaCursos();
     }
-    
+
     public static void getGraficaCursos() {
         try
         {
@@ -256,7 +223,6 @@ public class Manejador {
             e.printStackTrace();
         }
     }
-
 
     /**
      * METODOS PARA TABLA HASH DE ESTUDIANTES
@@ -284,9 +250,9 @@ public class Manejador {
     public static TablaHash<Estudiante> getTablaEstudiante() {
         return tablaEstudiantes;
     }
-    
-    public static void getGraficaEstudiantes(){
-         try
+
+    public static void getGraficaEstudiantes() {
+        try
         {
             String estudiantes = tablaEstudiantes.toString();
             String[] datos = estudiantes.split(",");
@@ -295,6 +261,19 @@ public class Manejador {
         {
             e.printStackTrace();
         }
+    }
+
+    public static String getSupgraphEstudiantes() {
+        try
+        {
+            String estudiantes = tablaEstudiantes.toString();
+            String[] datos = estudiantes.split(",");
+            return tablaEstudiantes.graficarTablaSubgraph(datos);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -328,8 +307,8 @@ public class Manejador {
     public static void getGraficaCatedraticos() {
         arbolCatedraticos.crearGrafica();
     }
-    
-    public static String getGraficaCatedraticosHorario(){
+
+    public static String getGraficaCatedraticosHorario() {
         return arbolCatedraticos.getGraficaHorario();
     }
 
@@ -366,9 +345,47 @@ public class Manejador {
     public static ArbolB<Horario> getArbolHorario() {
         return arbolHorarios;
     }
-    
-    public static void getGraficaHorarios(){
+
+    public static ArrayList<Curso> getCursoSalon(String edificio, int salon) {
+        ArrayList<Horario> horarios = getHorarios();
+        ArrayList<Curso> cursos = new ArrayList<>();
+        for (Horario horario : horarios)
+        {
+            if (horario.getEdificio().getName().equals(edificio))
+            {
+                if (horario.getSalon().getId() == salon)
+                {
+                    if (!yaExisteCurso(cursos,horario.getCurso()))
+                    {
+                        cursos.add(horario.getCurso());
+                    }
+                }
+            }
+        }
+        return cursos;
+    }
+
+    private static boolean yaExisteCurso(ArrayList<Curso> cursos, Curso curso) {
+        for (Curso cursoLista : cursos)
+        {
+            if (cursoLista.getId() == curso.getId())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void getGraficaHorarios() {
         arbolHorarios.getGrafica();
+    }
+
+    public static String getGraficaHorariosAsignaciones() {
+        return arbolHorarios.getGraficaForAsignaciones();
+    }
+
+    public static String getConexionHorariosAsignaciones(ArrayList<Asignacion> asignaciones) {
+        return arbolHorarios.getConexionHorarioAsignaciones(asignaciones);
     }
 
     /**
@@ -386,6 +403,10 @@ public class Manejador {
         return listaAsignaciones.getSize();
     }
 
+    public static ArrayList<Estudiante> getAsignacionesCurso(int codigo) {
+        return listaAsignaciones.getAsignacionesCurso(codigo);
+    }
+
     public static int getAsignacionesSalon(int salon, String edificio) {
         return listaAsignaciones.getAsignacionesSalon(salon, edificio);
     }
@@ -393,10 +414,14 @@ public class Manejador {
     public static ArrayList<Asignacion> getAsignaciones(int carnet) {
         return listaAsignaciones.getAsignacionesEstudiante(carnet);
     }
-    
-    public static void getGraficaAsignaciones(){
+
+    public static void getGraficaAsignaciones() {
         listaAsignaciones.graficarListaAsignaciones();
     }
+    
+    public static ArrayList<String []> getConteoSemestre(int semestre){
+        return listaAsignaciones.getConteoSemestre(semestre);
+    } 
 
     /**
      * METODO PARA GRAFICAR

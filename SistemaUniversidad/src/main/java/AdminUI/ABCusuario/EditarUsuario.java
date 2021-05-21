@@ -259,7 +259,7 @@ public class EditarUsuario extends javax.swing.JFrame {
         String name = nombreTxt.getText();
         String type = tipoTxt.getText();
         String password = passwordTxt.getText();
-        Usuario user = new Usuario(id,name,type,password);
+        Usuario user = new Usuario(id,name,password,type);
         if(Manejador.updateUser(user)){
             JOptionPane.showMessageDialog(this, "Se ha actualizado correctamente el usuario");
             editarButton.setEnabled(false);

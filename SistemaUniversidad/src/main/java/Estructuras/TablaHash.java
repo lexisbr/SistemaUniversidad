@@ -226,7 +226,7 @@ public class TablaHash<T> {
         return sb.toString();
     }
 
-    public static void graficarTabla(String[] datos) throws IOException {
+    public void graficarTabla(String[] datos) throws IOException {
         String texto = "";
         String punteros = "";
         texto += "struct1 [label=\"";
@@ -256,6 +256,36 @@ public class TablaHash<T> {
         StringBuffer codigo = new StringBuffer(salida);
         Manejador.generarGrafo(codigo, "tablaEstudiantes");
 
+    }
+    
+    public String graficarTablaSubgraph(String[] datos) throws IOException {
+        String texto = "";
+        String punteros = "";
+        texto += "struct1 [label=\"";
+        for (int i = 0; i < datos.length; i++)
+        {
+            if (i + 1 == datos.length)
+            {
+                texto += "<" + i + "> " + i;
+            } else
+            {
+                texto += "<" + i + "> " + i + "|";
+            }
+            if (!(datos[i].equalsIgnoreCase("[]") || datos[i].equalsIgnoreCase(" []")))
+            {
+                punteros += "struct1:" + i + "->" + "\"" + datos[i] + "\";\n";
+            } 
+        }
+        texto += "\"];\n";
+
+        String salida = "subgraph cluster_Estudiantes {\n rankdir=\"LR\";\n"
+                + "node [shape=record];";
+        salida += texto;
+        salida += punteros;
+        salida += "label = \" Tabla de Estudiantes \";\n";
+        salida += "}\n";
+
+        return salida;
     }
 
     private class List<T> {

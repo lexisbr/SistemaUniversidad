@@ -9,6 +9,7 @@ import Nucleo.Manejador;
 import Objetos.Asignacion;
 import Objetos.Curso;
 import Objetos.Edificio;
+import Objetos.Estudiante;
 import Objetos.Horario;
 import Objetos.Salon;
 import Objetos.Usuario;
@@ -304,8 +305,123 @@ public class ListaCircular<T> {
         return asignaciones;
     }
 
+    public ArrayList<Estudiante> getAsignacionesCurso(int codigo) {
+        ArrayList<Estudiante> estudiantes = new ArrayList<>();
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+
+            do
+            {
+                if (aux.getData() instanceof Asignacion)
+                {
+                    Asignacion asignacion = (Asignacion) aux.getData();
+                    if (asignacion.getHorario().getCurso().getId() == codigo)
+                    {
+                        estudiantes.add(asignacion.getEstudiante());
+                    }
+                }
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return estudiantes;
+    }
+
+    public ArrayList<String[]> getConteoSemestre(int semestre) {
+        ArrayList<String[]> conteoCursos = new ArrayList<>();
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+
+            do
+            {
+                if (aux.getData() instanceof Asignacion)
+                {
+                    Asignacion asignacion = (Asignacion) aux.getData();
+                    if (asignacion.getHorario().getCurso().getSemester() == semestre)
+                    {
+                        Curso curso = asignacion.getHorario().getCurso();
+                        if (!yaExisteCurso(conteoCursos, curso))
+                        {
+                            String aprobados = String.valueOf(getAprobados(curso.getId()));
+                            String reprobados = String.valueOf(getReprobados(curso.getId()));
+                            String[] cursoCadena =
+                            {
+                                curso.getName(), aprobados, reprobados
+                            };
+                            conteoCursos.add(cursoCadena);
+                        }
+                    }
+                }
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return conteoCursos;
+    }
+
+    private boolean yaExisteCurso(ArrayList<String[]> cursos, Curso curso) {
+        for (String[] cursoLista : cursos)
+        {
+            if (cursoLista[0].equals(String.valueOf(curso.getName())))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getSize() {
         return size;
+    }
+
+    public int getAprobados(int curso) {
+        int conteo = 0;
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+
+            do
+            {
+                if (aux.getData() instanceof Asignacion)
+                {
+                    Asignacion asignacion = (Asignacion) aux.getData();
+                    if (asignacion.getHorario().getCurso().getId() == curso)
+                    {
+                        if (asignacion.getZona() + asignacion.getFinal_test() >= 61)
+                        {
+                            conteo++;
+                        }
+                    }
+                }
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return conteo;
+    }
+
+    public int getReprobados(int curso) {
+        int conteo = 0;
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+
+            do
+            {
+                if (aux.getData() instanceof Asignacion)
+                {
+                    Asignacion asignacion = (Asignacion) aux.getData();
+                    if (asignacion.getHorario().getCurso().getId() == curso)
+                    {
+                        if (asignacion.getZona() + asignacion.getFinal_test() < 61)
+                        {
+                            conteo++;
+                        }
+                    }
+                }
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return conteo;
     }
 
     public void graficarListaCircular() throws IOException {
@@ -444,7 +560,6 @@ public class ListaCircular<T> {
 
     public void graficarListaAsignaciones() {
         String salida = "digraph G{\n";
-        salida += "graph [compound=true];\n";
         salida += "style=filled;\n";
         salida += "subgraph cluster_0{\n"
                 + "style=filled;\n"
@@ -455,9 +570,28 @@ public class ListaCircular<T> {
         salida += getGraficaAsignaciones();
         salida += "label=\"Lista de Asignaciones\";\n";
         salida += "}";
+        salida += Manejador.getGraficaHorariosAsignaciones();
+        salida += Manejador.getConexionHorariosAsignaciones(getListaAsignaciones());
+        salida += Manejador.getSupgraphEstudiantes();
+        salida += getConexionAsignacionEstudiante();
         salida += "}";
         StringBuffer codigo = new StringBuffer(salida);
-        Manejador.generarGrafo(codigo,"listaAsignaciones");
+        Manejador.generarGrafo(codigo, "listaAsignaciones");
+    }
+
+    private ArrayList<Asignacion> getListaAsignaciones() {
+        ArrayList<Asignacion> asignaciones = new ArrayList<>();
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+            do
+            {
+                Asignacion asignacion = (Asignacion) aux.getData();
+                asignaciones.add(asignacion);
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return asignaciones;
     }
 
     private String getGraficaAsignaciones() {
@@ -474,18 +608,26 @@ public class ListaCircular<T> {
                         + "\"" + asignacionSiguiente.getId() + "\n" + asignacionSiguiente.getEstudiante().getId() + "\n" + asignacionSiguiente.getHorario().getId() + "\n" + asignacionSiguiente.getZona() + "\n" + asignacionSiguiente.getFinal_test() + "\"" + " [constraint=false]; \n";
                 salida += "\"" + asignacionSiguiente.getId() + "\n" + asignacionSiguiente.getEstudiante().getId() + "\n" + asignacionSiguiente.getHorario().getId() + "\n" + asignacionSiguiente.getZona() + "\n" + asignacionSiguiente.getFinal_test() + "\"" + "->"
                         + "\"" + asignacionAnterior.getId() + "\n" + asignacionAnterior.getEstudiante().getId() + "\n" + asignacionAnterior.getHorario().getId() + "\n" + asignacionAnterior.getZona() + "\n" + asignacionAnterior.getFinal_test() + "\"" + " [constraint=false]; \n";
-                salida += 
                 aux = aux.getNext();
             } while (aux != root);
         }
         return salida;
     }
-    
-    private String conectarAsignacionesHorario(Asignacion asignacion){
-        Horario horario = asignacion.getHorario();
-        String salida = "\"" + asignacion.getId() + "\n" + asignacion.getEstudiante().getId() + "\n" + asignacion.getHorario().getId() + "\n" + asignacion.getZona() + "\n" + asignacion.getFinal_test() + "\"" +"->"
-                            ;
-        return null;
+
+    private String getConexionAsignacionEstudiante() {
+        String salida = "";
+        if (root != null)
+        {
+            Nodo<T> aux = root;
+            do
+            {
+                Asignacion asignacion = (Asignacion) aux.getData();
+                salida += "\"" + asignacion.getId() + "\n" + asignacion.getEstudiante().getId() + "\n" + asignacion.getHorario().getId() + "\n" + asignacion.getZona() + "\n" + asignacion.getFinal_test() + "\"" + "->";
+                salida += "\" [" + asignacion.getEstudiante().getId() + "]\"" + "[constraint=false,lhead = cluster_Estudiante,arrowhead=normal,arrowtail=dot,color=cadetblue4]; \n";
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return salida;
     }
 
     private class Nodo<T> {
